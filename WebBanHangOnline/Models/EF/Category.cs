@@ -12,7 +12,7 @@ namespace WebBanHangOnline.Models.EF
     {
         public Category()
         {
-            this.News = new HashSet<New>();
+            this.New = new HashSet<New>();
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -33,7 +33,7 @@ namespace WebBanHangOnline.Models.EF
         public string SeoKeyWords { get; set; }
         public bool IsActive { get; set; }
         public int Position { get; set; }
-        public ICollection<New> News { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<New> New { get; set; }
+        public ICollection<Post> Post { get; set; }
     }
 }

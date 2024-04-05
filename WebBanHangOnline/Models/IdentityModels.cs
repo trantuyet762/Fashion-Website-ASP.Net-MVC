@@ -29,7 +29,7 @@ namespace WebBanHangOnline.Models
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Adv> Advs { get; set; }
-        public DbSet<Post> Posts { get; set; }
+        public DbSet<Post> Post { get; set; }
         public DbSet<New> New { get; set; }
         public DbSet<SystemSetting> SystemSettings { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
@@ -38,6 +38,7 @@ namespace WebBanHangOnline.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
+       
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

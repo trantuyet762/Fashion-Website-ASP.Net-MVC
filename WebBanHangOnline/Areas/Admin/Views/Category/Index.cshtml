@@ -110,7 +110,7 @@
                 var conf = confirm('Bạn có muốn xóa bản ghi này không?');
                 if (conf == true) {
                     $.ajax({
-                        url: '/admin/news/delete',
+                        url: '/admin/category/delete',
                         type: 'POST',
                         data: { id: id },
                         success: function (rs) {

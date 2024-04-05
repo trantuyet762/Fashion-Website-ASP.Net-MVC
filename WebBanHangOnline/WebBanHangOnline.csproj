@@ -49,7 +49,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Content\ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.Base.3.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.3.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -174,16 +186,39 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202403251556433_CreatedDataabase.cs" />
-    <Compile Include="Migrations\202403251556433_CreatedDataabase.Designer.cs">
-      <DependentUpon>202403251556433_CreatedDataabase.cs</DependentUpon>
+    <Compile Include="Migrations\202403290824498_CreatedDatabase.cs" />
+    <Compile Include="Migrations\202403290824498_CreatedDatabase.Designer.cs">
+      <DependentUpon>202403290824498_CreatedDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403291022512_ChangeModels.cs" />
+    <Compile Include="Migrations\202403291022512_ChangeModels.Designer.cs">
+      <DependentUpon>202403291022512_ChangeModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403310755098_UpdateProductCategory.cs" />
+    <Compile Include="Migrations\202403310755098_UpdateProductCategory.Designer.cs">
+      <DependentUpon>202403310755098_UpdateProductCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403310909558_updateproductcategory2.cs" />
+    <Compile Include="Migrations\202403310909558_updateproductcategory2.Designer.cs">
+      <DependentUpon>202403310909558_updateproductcategory2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404020825095_UpdateProduct.cs" />
+    <Compile Include="Migrations\202404020825095_UpdateProduct.Designer.cs">
+      <DependentUpon>202404020825095_UpdateProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404020843334_UpdateProducts.cs" />
+    <Compile Include="Migrations\202404020843334_UpdateProducts.Designer.cs">
+      <DependentUpon>202404020843334_UpdateProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -203,6 +238,7 @@
     <Compile Include="Models\EF\SystemSetting.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -2996,10 +3032,15 @@
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="obj\Debug\WebBanHangOnline.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\WebBanHangOnline.dll" />
+    <Content Include="obj\Debug\WebBanHangOnline.pdb" />
+    <Content Include="Scripts\autoNumeric-1.9.45.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -3100,9 +3141,23 @@
     <Content Include="Content\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="Content\ckeditor\skins\moono\readme.md" />
     <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
-    <Content Include="Areas\Admin\Views\News\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\News\Add.cshtml" />
-    <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\New\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\New\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\New\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Posts\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Posts\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Edit.cshtml" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\WebBanHangOnline.csproj.AssemblyReference.cache" />
+    <Content Include="obj\Debug\WebBanHangOnline.csproj.CopyComplete" />
+    <Content Include="obj\Debug\WebBanHangOnline.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\WebBanHangOnline.csproj.GenerateResource.cache" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3114,6 +3169,28 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\files\body2.jpg" />
+    <Content Include="Uploads\images\body1.jpg" />
+    <Content Include="Uploads\images\body2.jpg" />
+    <Content Include="Uploads\images\cv3.jpg" />
+    <Content Include="Uploads\images\nail4.jpg" />
+    <Content Include="Uploads\images\posts1.jpg" />
+    <Content Include="Uploads\images\Screenshot 2023-09-11 105048.png" />
+    <Content Include="Uploads\images\Screenshot 2023-10-25 231023.png" />
+    <Content Include="Uploads\images\Screenshot 2024-01-04 123549.png" />
+    <Content Include="Uploads\images\Screenshot 2024-02-29 192334.png" />
+    <Content Include="Uploads\images\vdd3.jpg" />
+    <Content Include="Uploads\_thumbs\Files\body2.jpg" />
+    <Content Include="Uploads\_thumbs\Images\body1.jpg" />
+    <Content Include="Uploads\_thumbs\Images\body2.jpg" />
+    <Content Include="Uploads\_thumbs\Images\cv3.jpg" />
+    <Content Include="Uploads\_thumbs\Images\nail4.jpg" />
+    <Content Include="Uploads\_thumbs\Images\posts1.jpg" />
+    <Content Include="Uploads\_thumbs\Images\Screenshot 2023-09-11 105048.png" />
+    <Content Include="Uploads\_thumbs\Images\Screenshot 2023-10-25 231023.png" />
+    <Content Include="Uploads\_thumbs\Images\Screenshot 2024-01-04 123549.png" />
+    <Content Include="Uploads\_thumbs\Images\Screenshot 2024-02-29 192334.png" />
+    <Content Include="Uploads\_thumbs\Images\vdd3.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3153,6 +3230,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\ckfinder\userfiles\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Uploads\flash\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3168,9 +3247,28 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202403251556433_CreatedDataabase.resx">
-      <DependentUpon>202403251556433_CreatedDataabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202403290824498_CreatedDatabase.resx">
+      <DependentUpon>202403290824498_CreatedDatabase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403291022512_ChangeModels.resx">
+      <DependentUpon>202403291022512_ChangeModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403310755098_UpdateProductCategory.resx">
+      <DependentUpon>202403310755098_UpdateProductCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403310909558_updateproductcategory2.resx">
+      <DependentUpon>202403310909558_updateproductcategory2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404020825095_UpdateProduct.resx">
+      <DependentUpon>202404020825095_UpdateProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404020843334_UpdateProducts.resx">
+      <DependentUpon>202404020843334_UpdateProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.ChangeModels.resources" />
+    <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.CreatedDatabase.resources" />
+    <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.UpdateProductCategory.resources" />
+    <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.updateproductcategory2.resources" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
