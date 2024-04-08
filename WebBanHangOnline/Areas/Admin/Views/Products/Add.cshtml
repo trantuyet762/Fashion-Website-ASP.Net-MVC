@@ -14,7 +14,7 @@
             <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/products" class="nav-link">Tin tức</a>
+            <a href="/admin/products" class="nav-link">Sản phẩm</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Thêm mới</a>
@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail">Danh mục</label>
-                                            @Html.DropDownListFor(x => x.ProductCategoryID, ViewBag.Productcategory as SelectList, "- Chọn danh mục sản phẩm - ", new { @class = "form-control", @placeholder = "Mô tả" })
+                                            @Html.DropDownListFor(x => x.ProductCategoryID, ViewBag.ProductCategory as SelectList, "- Chọn danh mục sản phẩm - ", new { @class = "form-control" })
                                             @Html.ValidationMessageFor(x => x.ProductCategoryID,null, new { @class = "text-danger" })
                                         </div>
                                         <div class="form-group">
@@ -99,7 +99,7 @@
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Số lượng</label>
-                                                    @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control auto", @Value="1" })
+                                                    @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control ", @Value="" })
                                                     @Html.ValidationMessageFor(x => x.Quantity, null, new { @class = "text-danger" })
                                                 </div>
 
@@ -108,7 +108,7 @@
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Giá</label>
                                                     <input type="text" name="demoPrice"  id="demoPrice" class="form-control auto"  >
-                                                    @Html.HiddenFor(x => x.Price, new { @class = "form-control auto", @placeholder = "Giá" })
+                                                    @Html.HiddenFor(x => x.Price, new { @class = "", @placeholder = "Giá" })
                                                     @Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })
                                                 </div>
 

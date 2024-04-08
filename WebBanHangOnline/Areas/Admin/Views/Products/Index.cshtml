@@ -3,7 +3,7 @@
 @using PagedList;
 @{
     ViewBag.Title = "Sản phẩm";
-    Layout ="~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -21,6 +21,7 @@
         </li>
     </ul>
 }
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -58,26 +59,26 @@
             </div>
         </div>
         <div class="card-body">
-          @*  <div class="row">
-                <div class="col-3 ">
+            @*  <div class="row">
+                    <div class="col-3 ">
 
 
 
 
-                    @using (Html.BeginForm("index", "Products", FormMethod.Get, new { }))
-                    {
-                        <div class="input-group input-group-sm">
-                            @Html.TextBox("Searchtext", "@ViewData['CurrentFilter']", new { @class = "form-control" })
+                        @using (Html.BeginForm("index", "Products", FormMethod.Get, new { }))
+                        {
+                            <div class="input-group input-group-sm">
+                                @Html.TextBox("Searchtext", "@ViewData['CurrentFilter']", new { @class = "form-control" })
 
-                            <span class="input-group-append">
-                                <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>
-                            </span>
-                        </div>
+                                <span class="input-group-append">
+                                    <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>
+                                </span>
+                            </div>
 
-                    }
+                        }
 
-                </div>
-            </div>*@
+                    </div>
+                </div>*@
             <table class="table table-hover">
                 <thead>
                     <tr class="text-center">
@@ -97,16 +98,16 @@
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                       
-                       var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
+
+                        var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
                         foreach (var item in Model)
                         {
 
                             var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             <tr id="trow_@item.id" class="text-center">
                                 <td><input type="checkbox" class="cbkItem" value="@item.id" /></td>
-                                 <td>@i</td>
-                                <td><img src="@item.Image" width="50" /></td>
+                                <td>@i</td>
+                                <td><img class="imgproduct" data-id="@item.id" src="@item.ProductImage.FirstOrDefault(x=>x.IsDefault).Image"  width="50" /></td>
                                 <td>@item.Title</td>
                                 <td>@item.ProductCategory.Title</td>
                                 <td>@item.Quantity</td>
@@ -145,10 +146,36 @@
 
 </section>
 <!-- /.content -->
+<div id="dialog">
+    <iframe id="myIframe" style="border: 0; width: 100%; height:100%;"></iframe>
+</div>
 @section scripts{
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
 
+
+
         $(document).ready(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                show: "fade",
+                hide: "fade",
+                modal: true,
+                height: '600',
+                width: '700',
+                resizable: true,
+                title: 'Quản lý ảnh sản phẩm',
+                close: function () {
+                    window.location.reload();
+                }
+
+            });
+            $('body').on("click", ".imgproduct", function () {
+                var proid = $(this).attr("data-id");
+                $("#dialog #myIframe").attr("src", "/admin/ProductImages/Index?id=" + proid);
+                $('#dialog').dialog('open');
+                return false;
+            });
             $('body').on('click', '#BtnDeleteAll', function (e) {
                 e.preventDefault();
                 var str = "";
@@ -160,18 +187,18 @@
                     if (this.checked) {
                         checkbox.attr('selected', 'checked');
                         var _id = $(this).val();
-                        if (i === 0){
-                    str += _id;
-                } else {
-                    str += "," + _id;
-                }
-                i++;
+                        if (i === 0) {
+                            str += _id;
+                        } else {
+                            str += "," + _id;
+                        }
+                        i++;
 
-            } else {
-                checkbox.attr('selected', '');
-            }
+                    } else {
+                        checkbox.attr('selected', '');
+                    }
 
-            });
+                });
                 if (str.length > 0) {
                     var conf = confirm('Bạn có muốn xóa các bản ghi này không?');
                     if (conf === true) {
@@ -188,7 +215,6 @@
                     }
                 }
             });
-       
 
             $('body').on('change', "#SelectAll", function () {
                 var checkStatus = this.checked;
@@ -201,7 +227,7 @@
                         checkbox.attr('selected', '');
                     }
 
-                    })
+                })
             });
             $('body').on('click', '.btnDelete', function () {
                 var id = $(this).data("id");
@@ -225,27 +251,27 @@
 
                 var id = btn.data("id");
 
-                    $.ajax({
-                        url: '/admin/products/IsActive',
-                        type: 'POST',
-                        data: { id: id },
-                        success: function (rs) {
-                            debugger;
-                            if (rs.success) {
-                                if (rs.isActive) {
-                                    btn.html("<i class='fa fa-check text-success'></i>");
-                                }
-                                else {
-                                    btn.html("<i class='fas fa-times text-danger'></i>");
-
-                                }
+                $.ajax({
+                    url: '/admin/products/IsActive',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        debugger;
+                        if (rs.success) {
+                            if (rs.isActive) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
                             }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
 
+                            }
                         }
-                    });
+
+                    }
+                });
 
             });
-     
+        });
     </script>
 }
 

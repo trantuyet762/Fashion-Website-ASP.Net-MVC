@@ -123,3 +123,4 @@ E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.Configuration.Configu
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateProduct.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateProducts.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.update54.resources
