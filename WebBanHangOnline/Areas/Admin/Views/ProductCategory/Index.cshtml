@@ -63,7 +63,7 @@
                     <tr class="text-center">
                         <th><input type="checkbox" id="SelectAll" /></th>
                         <th>STT</th>
-                      
+                        <th>Hình ảnh</th>
                         <th>Tiêu đề</th>
                         <th>Ngày tạo</th>
                        
@@ -83,7 +83,7 @@
                             <tr id="trow_@item.id" class="text-center">
                                 <td><input type="checkbox" class="cbkItem" value="@item.id" /></td>
                                 <td>@i</td>
-                                
+                                <td><img src="@item.Icon" width="50" /></td>
                                 <td>@item.Title</td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyy")</td>
                                 @*<td>
