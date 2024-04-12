@@ -124,3 +124,5 @@ E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.Configuration.Configu
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateProduct.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateProducts.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.update54.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateCategory.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatecategory124.resources

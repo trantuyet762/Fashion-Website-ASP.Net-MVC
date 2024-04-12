@@ -194,6 +194,7 @@
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\SettingHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -228,6 +229,14 @@
     <Compile Include="Migrations\202404051035000_update54.cs" />
     <Compile Include="Migrations\202404051035000_update54.Designer.cs">
       <DependentUpon>202404051035000_update54.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404111803078_UpdateCategory.cs" />
+    <Compile Include="Migrations\202404111803078_UpdateCategory.Designer.cs">
+      <DependentUpon>202404111803078_UpdateCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404121656104_updatecategory124.cs" />
+    <Compile Include="Migrations\202404121656104_updatecategory124.Designer.cs">
+      <DependentUpon>202404121656104_updatecategory124.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -280,7 +289,8 @@
     <Content Include="Content\assets\images\single_3.jpg" />
     <Content Include="Content\assets\images\single_3_thumb.jpg" />
     <Content Include="Content\assets\images\slider_1.jpg" />
-    <Content Include="Content\assets\js\categories_custom.js" />
+    <Content Include="Content\assets\js\categoriesprice1_custom.js" />
+    <Content Include="Content\assets\js\categoriesprice_custom.js" />
     <Content Include="Content\assets\js\contact_custom.js" />
     <Content Include="Content\assets\js\custom.js" />
     <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
@@ -3338,6 +3348,10 @@
     <Content Include="Views\Menu\_MenuArrivals.cshtml" />
     <Content Include="Views\Products\Partial_ItemsByCateId.cshtml" />
     <Content Include="Views\Products\Partial_ProductSales.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Menu\_MenuLeft.cshtml" />
+    <Content Include="Views\Products\ProductCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3380,6 +3394,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404051035000_update54.resx">
       <DependentUpon>202404051035000_update54.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404111803078_UpdateCategory.resx">
+      <DependentUpon>202404111803078_UpdateCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404121656104_updatecategory124.resx">
+      <DependentUpon>202404121656104_updatecategory124.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.ChangeModels.resources" />
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.CreatedDatabase.resources" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanHangOnline.Models;
-using WebBanHangOnline.Models.EF;
+
 namespace WebBanHangOnline.Controllers
 {
     public class MenuController : Controller
@@ -30,6 +30,15 @@ namespace WebBanHangOnline.Controllers
         {
             var items = db.ProductCategories.ToList();
             return PartialView("_MenuArrivals", items);
+        }
+        public ActionResult MenuLeft(int? id)
+        {
+            if (id != null)
+            {
+                ViewBag.CateId = id;
+            }
+            var items = db.ProductCategories.ToList();
+            return PartialView("_MenuLeft", items);
         }
     }
 }
