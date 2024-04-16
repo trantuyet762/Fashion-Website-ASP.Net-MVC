@@ -92,6 +92,7 @@
                         <th>Ngày tạo</th>
                         <th>Home</th>
                         <th>Sale</th>
+                        <th>Hot</th>
                         <th>Hiển thị</th>
 
                         <th style="width:150px;"></th>
@@ -107,6 +108,7 @@
                             var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             var strCheckHome = item.IsHome ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             var strCheckSale = item.IsSale ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            var strCheckHot = item.IsHot ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             var strImage = "";
                             var img = item.ProductImage.FirstOrDefault(x => x.IsDefault);
                             if (item != null)
@@ -116,11 +118,11 @@
                     <tr id="trow_@item.id" class="text-center">
                         <td><input type="checkbox" class="cbkItem" value="@item.id" /></td>
                         <td>@i</td>
-                        <td><img class="imgproduct" data-id="@item.id" src="@item.ProductImage.FirstOrDefault(x=>x.IsDefault).Image" width="50" /></td>
+                        <td><img class="imgproduct" data-id="@item.id" src="@item.ProductImage.FirstOrDefault(x=>x.IsDefault).Image" width="50"/></td>
                         <td>@item.Title</td>
                         <td>@item.ProductCategory.Title</td>
                         <td>@item.Quantity</td>
-                        <td>@item.Price</td>
+                        <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</td>
                         <td>@item.CreatedDate.ToString("dd/MM/yyy")</td>
                         <td class="text-center">
                             <a href="#" data-id="@item.id" class="btnHome">@Html.Raw(strCheckHome)</a>
@@ -128,6 +130,10 @@
                         </td>
                         <td class="text-center">
                             <a href="#" data-id="@item.id" class="btnSale">@Html.Raw(strCheckSale)</a>
+
+                        </td>
+                        <td class="text-center">
+                            <a href="#" data-id="@item.id" class="btnHot">@Html.Raw(strCheckHot)</a>
 
                         </td>
                         <td class="text-center">
@@ -328,6 +334,32 @@
                         debugger;
                         if (rs.success) {
                             if (rs.isSale) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
+
+                            }
+                        }
+
+                    }
+                });
+
+            });
+            $('body').on('click', '.btnHot', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+
+                var id = btn.data("id");
+
+                $.ajax({
+                    url: '/admin/products/IsHot',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        debugger;
+                        if (rs.success) {
+                            if (rs.isHot) {
                                 btn.html("<i class='fa fa-check text-success'></i>");
                             }
                             else {

@@ -199,6 +199,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,6 +239,34 @@
     <Compile Include="Migrations\202404121656104_updatecategory124.Designer.cs">
       <DependentUpon>202404121656104_updatecategory124.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404131422108_updateproductprice.cs" />
+    <Compile Include="Migrations\202404131422108_updateproductprice.Designer.cs">
+      <DependentUpon>202404131422108_updateproductprice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404131853048_updateCateProduct.cs" />
+    <Compile Include="Migrations\202404131853048_updateCateProduct.Designer.cs">
+      <DependentUpon>202404131853048_updateCateProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404140634437_price.cs" />
+    <Compile Include="Migrations\202404140634437_price.Designer.cs">
+      <DependentUpon>202404140634437_price.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404140656427_price1.cs" />
+    <Compile Include="Migrations\202404140656427_price1.Designer.cs">
+      <DependentUpon>202404140656427_price1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404141040562_price2.cs" />
+    <Compile Include="Migrations\202404141040562_price2.Designer.cs">
+      <DependentUpon>202404141040562_price2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404151629264_addcart.cs" />
+    <Compile Include="Migrations\202404151629264_addcart.Designer.cs">
+      <DependentUpon>202404151629264_addcart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404151818130_addcart1.cs" />
+    <Compile Include="Migrations\202404151818130_addcart1.Designer.cs">
+      <DependentUpon>202404151818130_addcart1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common\Filter.cs" />
@@ -256,6 +285,7 @@
     <Compile Include="Models\EF\SystemSetting.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -289,8 +319,7 @@
     <Content Include="Content\assets\images\single_3.jpg" />
     <Content Include="Content\assets\images\single_3_thumb.jpg" />
     <Content Include="Content\assets\images\slider_1.jpg" />
-    <Content Include="Content\assets\js\categoriesprice1_custom.js" />
-    <Content Include="Content\assets\js\categoriesprice_custom.js" />
+    <Content Include="Content\assets\js\categories_custom.js" />
     <Content Include="Content\assets\js\contact_custom.js" />
     <Content Include="Content\assets\js\custom.js" />
     <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
@@ -316,12 +345,16 @@
     <Content Include="Content\assets\styles\bootstrap4\popper.js" />
     <Content Include="Content\assets\styles\categories_responsive.css" />
     <Content Include="Content\assets\styles\categories_styles.css" />
+    <Content Include="Content\assets\styles\categories_styles1.css" />
     <Content Include="Content\assets\styles\contact_responsive.css" />
     <Content Include="Content\assets\styles\contact_styles.css" />
+    <Content Include="Content\assets\styles\detail_style.css" />
     <Content Include="Content\assets\styles\main_styles.css" />
+    <Content Include="Content\assets\styles\main_styles1.css" />
     <Content Include="Content\assets\styles\responsive.css" />
     <Content Include="Content\assets\styles\single_responsive.css" />
-    <Content Include="Content\assets\styles\single_styles.css" />
+    <Content Include="Content\assets\styles\single_responsive1.css" />
+    <Content Include="Content\assets\styles\single_styles1.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -3286,6 +3319,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsShopping.js" />
+    <Content Include="Scripts\jsShopping1.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Uploads\files\body2.jpg" />
     <Content Include="Uploads\images\body1.jpg" />
@@ -3352,6 +3387,8 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Menu\_MenuLeft.cshtml" />
     <Content Include="Views\Products\ProductCategory.cshtml" />
+    <Content Include="Views\Products\Detail.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3400,6 +3437,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404121656104_updatecategory124.resx">
       <DependentUpon>202404121656104_updatecategory124.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404131422108_updateproductprice.resx">
+      <DependentUpon>202404131422108_updateproductprice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404131853048_updateCateProduct.resx">
+      <DependentUpon>202404131853048_updateCateProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404140634437_price.resx">
+      <DependentUpon>202404140634437_price.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404140656427_price1.resx">
+      <DependentUpon>202404140656427_price1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404141040562_price2.resx">
+      <DependentUpon>202404141040562_price2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404151629264_addcart.resx">
+      <DependentUpon>202404151629264_addcart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404151818130_addcart1.resx">
+      <DependentUpon>202404151818130_addcart1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.ChangeModels.resources" />
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.CreatedDatabase.resources" />

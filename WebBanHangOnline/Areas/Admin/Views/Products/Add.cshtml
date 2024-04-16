@@ -99,25 +99,25 @@
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Số lượng</label>
-                                                    @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control ", @Value="" })
+                                                    @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control ", @Value = "1" })
                                                     @Html.ValidationMessageFor(x => x.Quantity, null, new { @class = "text-danger" })
                                                 </div>
 
                                             </div>
+                                        
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail">Giá</label>
-                                                    <input type="text" name="demoPrice"  id="demoPrice" class="form-control auto"  >
-                                                    @Html.HiddenFor(x => x.Price, new { @class = "", @placeholder = "Giá" })
+                                                    <label for="exampleInputEmail">Giá </label>
+                                                    <input type="text" name="demoPrice" id="demoPriceSale" class="form-control auto" >
+                                                    @Html.HiddenFor(x => x.Price, new { @class = "", @placeholder = "Giá " })
                                                     @Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })
                                                 </div>
-
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Giá khuyến mãi</label>
-                                                    <input type="text" name="demoPriceSale" id="demoPriceSale" class="form-control auto"  >
-                                                    @Html.HiddenFor(x => x.PriceSale, new { @class = "", @placeholder = "Giá khuyến mãi" })
+                                                    <input type="text" name="demoPriceSale" id="demoPriceSale" value="" class="form-control auto">
+                                                    @Html.HiddenFor(x => x.PriceSale, new { @class = "form-control", @placeholder = "Giá khuyến mãi" })
                                                     @Html.ValidationMessageFor(x => x.PriceSale, null, new { @class = "text-danger" })
                                                 </div>
                                             </div>

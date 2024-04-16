@@ -12,7 +12,9 @@
     <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+    @*<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">*@
+   @* <link href="~/Content/assets/styles/main_styles1.css" rel="stylesheet" />*@
+    
     <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/responsive.css">
     @*  @Styles.Render("~/Content/css")*@
     @Scripts.Render("~/bundles/modernizr")
@@ -95,9 +97,9 @@
                                     <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                                     <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                                     <li class="checkout">
-                                        <a href="#">
+                                        <a href="/gio-hang">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                            <span id="checkout_items" class="checkout_items">2</span>
+                                            <span id="checkout_items" class="checkout_items">0</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -235,6 +237,8 @@
     <script src="~/Content/assets/plugins/easing/easing.js"></script>
     <script src="~/Content/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
     <script src="~/Content/assets/js/custom.js"></script>
+    <script src="~/Scripts/jsShopping1.js"></script>
+    @*<script src="~/Scripts/jsShopping.js"></script>*@
     @*   @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>

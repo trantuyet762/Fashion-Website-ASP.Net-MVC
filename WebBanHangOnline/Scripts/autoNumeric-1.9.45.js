@@ -32,7 +32,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-(function(factory) {
+(function (factory) {
     if (typeof define === "function" && define.amd) {
         /** AMD. Register as an anonymous module. */
         define(["jquery"], factory);
@@ -43,7 +43,7 @@
         /** Browser globals */
         factory(window.jQuery);
     }
-}(function($) {
+}(function ($) {
     "use strict";
     /*jslint browser: true*/
     /*global jQuery: false*/
@@ -102,7 +102,7 @@
          * k = option name example k=aNum
          * val = option value example val=0123456789
          */
-        $.each(settings, function(k, val) {
+        $.each(settings, function (k, val) {
             if (typeof val === 'function') {
                 settings[k] = val($this, settings, k);
             } else if (typeof $this.autoNumeric[val] === 'function') {
@@ -119,7 +119,7 @@
      */
 
     function convertKeyToNumber(settings, key) {
-        if (typeof(settings[key]) === 'string') {
+        if (typeof (settings[key]) === 'string') {
             settings[key] *= 1;
         }
     }
@@ -378,8 +378,8 @@
         var ivRounded = '',
             i = 0,
             nSign = '',
-            rDec = (typeof(settings.aPad) === 'boolean' || settings.aPad === null) ? (settings.aPad ? settings.mDec : 0) : +settings.aPad;
-        var truncateZeros = function(ivRounded) { /** truncate not needed zeros */
+            rDec = (typeof (settings.aPad) === 'boolean' || settings.aPad === null) ? (settings.aPad ? settings.mDec : 0) : +settings.aPad;
+        var truncateZeros = function (ivRounded) { /** truncate not needed zeros */
             var regex = (rDec === 0) ? (/(\.(?:\d*[1-9])?)0*$/) : rDec === 1 ? (/(\.\d(?:\d*[1-9])?)0*$/) : new RegExp('(\\.\\d{' + rDec + '}(?:\\d*[1-9])?)0*$');
             ivRounded = ivRounded.replace(regex, '$1'); /** If there are no decimal places, we don't need a decimal point at the end */
             if (rDec === 0) {
@@ -536,7 +536,7 @@
         this.value = that.value;
     }
     AutoNumericHolder.prototype = {
-        init: function(e) {
+        init: function (e) {
             this.value = this.that.value;
             this.settingsClone = autoCode(this.$that, this.settings);
             this.ctrlKey = e.ctrlKey;
@@ -550,7 +550,7 @@
             this.processed = false;
             this.formatted = false;
         },
-        setSelection: function(start, end, setReal) {
+        setSelection: function (start, end, setReal) {
             start = Math.max(start, 0);
             end = Math.min(end, this.that.value.length);
             this.selection = {
@@ -562,16 +562,16 @@
                 setElementSelection(this.that, start, end);
             }
         },
-        setPosition: function(pos, setReal) {
+        setPosition: function (pos, setReal) {
             this.setSelection(pos, pos, setReal);
         },
-        getBeforeAfter: function() {
+        getBeforeAfter: function () {
             var value = this.value,
                 left = value.substring(0, this.selection.start),
                 right = value.substring(this.selection.end, value.length);
             return [left, right];
         },
-        getBeforeAfterStriped: function() {
+        getBeforeAfterStriped: function () {
             var parts = this.getBeforeAfter();
             parts[0] = autoStrip(parts[0], this.settingsClone);
             parts[1] = autoStrip(parts[1], this.settingsClone);
@@ -582,7 +582,7 @@
         /**
          * strip parts from excess characters and leading zeroes
          */
-        normalizeParts: function(left, right) {
+        normalizeParts: function (left, right) {
             var settingsClone = this.settingsClone;
             right = autoStrip(right, settingsClone); /** if right is not empty and first character is not aDec, */
             /** we could strip all zeros, otherwise only leading */
@@ -610,7 +610,7 @@
         /**
          * set part of number to value keeping position of cursor
          */
-        setValueParts: function(left, right, paste) {
+        setValueParts: function (left, right, paste) {
             var settingsClone = this.settingsClone,
                 parts = this.normalizeParts(left, right),
                 new_value = parts.join(''),
@@ -631,7 +631,7 @@
          * helper function for expandSelectionOnSign
          * returns sign position of a formatted value
          */
-        signPosition: function() {
+        signPosition: function () {
             var settingsClone = this.settingsClone,
                 aSign = settingsClone.aSign,
                 that = this.that;
@@ -651,7 +651,7 @@
          * expands selection to cover whole sign
          * prevents partial deletion/copying/overwriting of a sign
          */
-        expandSelectionOnSign: function(setReal) {
+        expandSelectionOnSign: function (setReal) {
             var sign_position = this.signPosition(),
                 selection = this.selection;
             if (selection.start < sign_position[1] && selection.end > sign_position[0]) { /** if selection catches something except sign and catches only space from sign */
@@ -670,7 +670,7 @@
         /**
          * try to strip pasted value to digits
          */
-        checkPaste: function() {
+        checkPaste: function () {
             if (this.valuePartsBeforePaste !== undefined) {
                 var parts = this.getBeforeAfter(),
 
@@ -688,7 +688,7 @@
          * process pasting, cursor moving and skipping of not interesting keys
          * if returns true, further processing is not performed
          */
-        skipAllways: function(e) {
+        skipAllways: function (e) {
             var kdCode = this.kdCode,
                 which = this.which,
                 ctrlKey = this.ctrlKey,
@@ -749,7 +749,7 @@
          * process deletion of characters
          * returns true if processing performed
          */
-        processAllways: function() {
+        processAllways: function () {
             var parts; /** process backspace or delete */
             if (this.kdCode === 8 || this.kdCode === 46) {
                 if (!this.selection.length) {
@@ -774,7 +774,7 @@
          * process insertion of characters
          * returns true if processing performed
          */
-        processKeypress: function() {
+        processKeypress: function () {
             var settingsClone = this.settingsClone,
                 cCode = String.fromCharCode(this.which),
                 parts = this.getBeforeAfterStriped(),
@@ -836,7 +836,7 @@
         /**
          * formatting of just processed value with keeping of cursor position
          */
-        formatQuick: function() {
+        formatQuick: function () {
             var settingsClone = this.settingsClone,
                 parts = this.getBeforeAfterStriped(),
                 leftLength = this.value;
@@ -930,8 +930,8 @@
          * $(someSelector).autoNumeric({option}); // initiate autoNumeric with options
          * options passes as a parameter example '{aSep: '.', aDec: ',', aSign: '€ '}
          */
-        init: function(options) {
-            return this.each(function() {
+        init: function (options) {
+            return this.each(function () {
                 var $this = $(this),
                     settings = $this.data('autoNumeric'),
                     /** attempt to grab 'autoNumeric' settings, if they don't exist returns "undefined". */
@@ -988,7 +988,7 @@
                 }
                 settings.runOnce = true;
                 if ($this.is('input[type=text], input[type=hidden], input[type=tel], input:not([type])')) { /**added hidden type */
-                    $this.on('keydown.autoNumeric', function(e) {
+                    $this.on('keydown.autoNumeric', function (e) {
                         holder = getHolder($this);
                         if (holder.settings.aDec === holder.settings.aSep) {
                             $.error("autoNumeric will not function properly when the decimal character aDec: '" + holder.settings.aDec + "' and thousand separator aSep: '" + holder.settings.aSep + "' are the same character");
@@ -1016,7 +1016,7 @@
                         holder.formatted = false;
                         return true;
                     });
-                    $this.on('keypress.autoNumeric', function(e) {
+                    $this.on('keypress.autoNumeric', function (e) {
                         holder = getHolder($this);
                         var processed = holder.processed;
                         holder.init(e);
@@ -1034,11 +1034,11 @@
                         }
                         holder.formatted = false;
                     });
-                    $this.on('keyup.autoNumeric', function(e) {
+                    $this.on('keyup.autoNumeric', function (e) {
                         holder = getHolder($this);
                         holder.init(e);
                         var skip = holder.skipAllways(e),
-							tabIn = holder.kdCode;
+                            tabIn = holder.kdCode;
                         holder.kdCode = 0;
                         delete holder.valuePartsBeforePaste;
                         if ($this[0].value === holder.settings.aSign) { /** added to properly place the caret when only the currency is present */
@@ -1048,8 +1048,8 @@
                                 setElementSelection(this, holder.settings.aSign.length, holder.settings.aSign.length);
                             }
                         } else if (tabIn === 9 && holder.settings.nBracket !== null && $this[0].value !== holder.settings.aSign) {
-							setElementSelection(this, 0, $this.val().length);	
-						}
+                            setElementSelection(this, 0, $this.val().length);
+                        }
                         if (skip) {
                             return true;
                         }
@@ -1060,7 +1060,7 @@
                             holder.formatQuick();
                         }
                     });
-                    $this.on('focusin.autoNumeric', function(e) {
+                    $this.on('focusin.autoNumeric', function (e) {
                         holder = getHolder($this);
                         var $settings = holder.settingsClone;
                         $settings.hasFocus = true;
@@ -1074,7 +1074,7 @@
                             $this.val(onEmpty);
                         }
                     });
-                    $this.on('focusout.autoNumeric', function(e) {
+                    $this.on('focusout.autoNumeric', function (e) {
                         holder = getHolder($this);
                         var $settings = holder.settingsClone,
                             value = $this.val(),
@@ -1114,8 +1114,8 @@
          * $(someSelector).autoNumeric('destroy'); // destroy autoNumeric
          * no parameters accepted
          */
-        destroy: function() {
-            return $(this).each(function() {
+        destroy: function () {
+            return $(this).each(function () {
                 var $this = $(this);
                 $this.removeData('autoNumeric');
                 $this.off('autoNumeric');
@@ -1127,8 +1127,8 @@
          * $(someSelector).autoNumeric('update', {options}); // updates the settings
          * options passes as a parameter example '{aSep: '.', aDec: ',', aSign: '€ '}
          */
-        update: function(options) {
-            return $(this).each(function() {
+        update: function (options) {
+            return $(this).each(function () {
                 var $this = autoGet($(this)),
                     settings = $this.data('autoNumeric');
                 if (typeof settings !== 'object') {
@@ -1154,11 +1154,11 @@
          * value passed as a string - can be a integer '1234' or double '1234.56789'
          * must contain only numbers and one decimal (period) character
          */
-        set: function(valueIn) {
+        set: function (valueIn) {
             if (valueIn === null || isNaN(valueIn)) {
                 return;
             }
-            return $(this).each(function() {
+            return $(this).each(function () {
                 var $this = autoGet($(this)),
                     settings = $this.data('autoNumeric'),
                     value = valueIn.toString(),
@@ -1201,7 +1201,7 @@
          * values returned as ISO numeric string "1234.56" where the decimal character is a period
          * only the first element in the selector is returned
          */
-        get: function() {
+        get: function () {
             var $this = autoGet($(this)),
                 settings = $this.data('autoNumeric');
             if (typeof settings !== 'object') {
@@ -1244,7 +1244,7 @@
          * $(someSelector).autoNumeric('getString'); no parameter accepted
          * values returned as ISO numeric string "1234.56" where the decimal character is a period
          */
-        getString: function() {
+        getString: function () {
             var isAutoNumeric = false,
                 $this = autoGet($(this)),
                 formFields = $this.serialize(),
@@ -1264,7 +1264,7 @@
                 count = 0;
             /*jslint unparam: true*/
             /* index of successful elements */
-            $.each(allFormElements[0], function(i, field) {
+            $.each(allFormElements[0], function (i, field) {
                 if (field.name !== '' && rsubmittable.test(field.localName) && !rsubmitterTypes.test(field.type) && !field.disabled && (field.checked || !rcheckableType.test(field.type))) {
                     scIndex.push(count);
                     count = count + 1;
@@ -1274,7 +1274,7 @@
             });
             /* index of all inputs tags except checkbox */
             count = 0;
-            $.each(allFormElements[0], function(i, field) {
+            $.each(allFormElements[0], function (i, field) {
                 if (field.localName === 'input' && (field.type === '' || field.type === 'text' || field.type === 'hidden' || field.type === 'tel')) {
                     aiIndex.push(count);
                     count = count + 1;
@@ -1285,7 +1285,7 @@
                     }
                 }
             });
-            $.each(formParts, function(i, miniParts) {
+            $.each(formParts, function (i, miniParts) {
                 miniParts = formParts[i].split('=');
                 var scElement = $.inArray(i, scIndex);
                 if (scElement > -1 && aiIndex[scElement] > -1) {
@@ -1313,7 +1313,7 @@
          * $(someSelector).autoNumeric('getArray'); no parameter accepted
          * values returned as ISO numeric string "1234.56" where the decimal character is a period
          */
-        getArray: function() {
+        getArray: function () {
             var isAutoNumeric = false,
                 $this = autoGet($(this)),
                 formFields = $this.serializeArray(),
@@ -1332,7 +1332,7 @@
                 count = 0;
             /*jslint unparam: true*/
             /* index of successful elements */
-            $.each(allFormElements[0], function(i, field) {
+            $.each(allFormElements[0], function (i, field) {
                 if (field.name !== '' && rsubmittable.test(field.localName) && !rsubmitterTypes.test(field.type) && !field.disabled && (field.checked || !rcheckableType.test(field.type))) {
                     scIndex.push(count);
                     count = count + 1;
@@ -1342,7 +1342,7 @@
             });
             /* index of all inputs tags */
             count = 0;
-            $.each(allFormElements[0], function(i, field) {
+            $.each(allFormElements[0], function (i, field) {
                 if (field.localName === 'input' && (field.type === '' || field.type === 'text' || field.type === 'hidden' || field.type === 'tel')) {
                     aiIndex.push(count);
                     count = count + 1;
@@ -1353,7 +1353,7 @@
                     }
                 }
             });
-            $.each(formFields, function(i, field) {
+            $.each(formFields, function (i, field) {
                 var scElement = $.inArray(i, scIndex);
                 if (scElement > -1 && aiIndex[scElement] > -1) {
                     var testInput = $('form:eq(' + formIndex + ') input:eq(' + aiIndex[scElement] + ')'),
@@ -1376,7 +1376,7 @@
          * $(someSelector).autoNumeric('getSettings'); // no parameters accepted
          * $(someSelector).autoNumeric('getSettings').aDec; // return the aDec setting as a string - ant valid setting can be used
          */
-        getSettings: function() {
+        getSettings: function () {
             var $this = autoGet($(this));
             return $this.eq(0).data('autoNumeric');
         }
@@ -1385,7 +1385,7 @@
     /**
      * autoNumeric function
      */
-    $.fn.autoNumeric = function(method) {
+    $.fn.autoNumeric = function (method) {
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
         }

@@ -62,7 +62,7 @@
 {
 	.single_product_thumbnails ul li
 	{
-		height: 110px;
+		height: 100%;
 	}
 	.single_product_image
 	{
