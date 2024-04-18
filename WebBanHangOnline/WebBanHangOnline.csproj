@@ -49,6 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Content\ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.1.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.Base.3.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
     </Reference>
@@ -64,6 +67,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.6, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.6\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -187,6 +198,7 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImagesController.cs" />
@@ -267,9 +279,39 @@
     <Compile Include="Migrations\202404151818130_addcart1.Designer.cs">
       <DependentUpon>202404151818130_addcart1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404170407347_updatePayment.cs" />
+    <Compile Include="Migrations\202404170407347_updatePayment.Designer.cs">
+      <DependentUpon>202404170407347_updatePayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404170643244_createTBThongKe.cs" />
+    <Compile Include="Migrations\202404170643244_createTBThongKe.Designer.cs">
+      <DependentUpon>202404170643244_createTBThongKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404170709534_updateThongKe.cs" />
+    <Compile Include="Migrations\202404170709534_updateThongKe.Designer.cs">
+      <DependentUpon>202404170709534_updateThongKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404170717553_updateTBThongKe.cs" />
+    <Compile Include="Migrations\202404170717553_updateTBThongKe.Designer.cs">
+      <DependentUpon>202404170717553_updateTBThongKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404171159551_updateOrder.cs" />
+    <Compile Include="Migrations\202404171159551_updateOrder.Designer.cs">
+      <DependentUpon>202404171159551_updateOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404171916362_updatekey.cs" />
+    <Compile Include="Migrations\202404171916362_updatekey.Designer.cs">
+      <DependentUpon>202404171916362_updatekey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404172017057_updateEmailOrderDetail.cs" />
+    <Compile Include="Migrations\202404172017057_updateEmailOrderDetail.Designer.cs">
+      <DependentUpon>202404172017057_updateEmailOrderDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common\Filter.cs" />
+    <Compile Include="Models\Common\ThongKeTruyCap.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Category.cs" />
     <Compile Include="Models\EF\CommonAbstract.cs" />
@@ -283,9 +325,12 @@
     <Compile Include="Models\EF\ProductImage.cs" />
     <Compile Include="Models\EF\Subscribe.cs" />
     <Compile Include="Models\EF\SystemSetting.cs" />
+    <Compile Include="Models\EF\ThongKe.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\ThongKeViewModel.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -344,7 +389,7 @@
     <Content Include="Content\assets\styles\bootstrap4\bootstrap.min.js" />
     <Content Include="Content\assets\styles\bootstrap4\popper.js" />
     <Content Include="Content\assets\styles\categories_responsive.css" />
-    <Content Include="Content\assets\styles\categories_styles.css" />
+    <Content Include="Content\assets\styles\categories_style.css" />
     <Content Include="Content\assets\styles\categories_styles1.css" />
     <Content Include="Content\assets\styles\contact_responsive.css" />
     <Content Include="Content\assets\styles\contact_styles.css" />
@@ -3145,6 +3190,8 @@
     <Content Include="Content\clients\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Content\clients\plugins\uplot\uPlot.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\templates\send1.html" />
+    <Content Include="Content\templates\send2.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -3309,6 +3356,12 @@
     <Content Include="Content\assets\plugins\themify-icons\fonts\themify.eot" />
     <Content Include="Content\assets\plugins\themify-icons\fonts\themify.ttf" />
     <Content Include="Content\assets\plugins\themify-icons\fonts\themify.woff" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\View.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Partial_SanPham.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3389,6 +3442,12 @@
     <Content Include="Views\Products\ProductCategory.cshtml" />
     <Content Include="Views\Products\Detail.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_Cart.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_Item_ThanhToan.cshtml" />
+    <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
+    <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
+    <Content Include="Views\Home\Refresh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3458,6 +3517,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404151818130_addcart1.resx">
       <DependentUpon>202404151818130_addcart1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404170407347_updatePayment.resx">
+      <DependentUpon>202404170407347_updatePayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404170643244_createTBThongKe.resx">
+      <DependentUpon>202404170643244_createTBThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404170709534_updateThongKe.resx">
+      <DependentUpon>202404170709534_updateThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404170717553_updateTBThongKe.resx">
+      <DependentUpon>202404170717553_updateTBThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404171159551_updateOrder.resx">
+      <DependentUpon>202404171159551_updateOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404171916362_updatekey.resx">
+      <DependentUpon>202404171916362_updatekey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404172017057_updateEmailOrderDetail.resx">
+      <DependentUpon>202404172017057_updateEmailOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.ChangeModels.resources" />
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.CreatedDatabase.resources" />

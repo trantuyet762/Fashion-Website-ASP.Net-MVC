@@ -1,5 +1,4 @@
-﻿body {
-}
+﻿
 @charset "utf-8";
 /* CSS Document */
 
@@ -1125,8 +1124,8 @@ section {
 .breadcrumbs {
     width: 100%;
     height: 60px;
-    border-bottom: solid 1px #ebebeb;
-    margin-bottom: 58px;
+    border-bottom: solid 0px #ebebeb;
+    margin-bottom: 0px;
 }
 
     .breadcrumbs ul li {

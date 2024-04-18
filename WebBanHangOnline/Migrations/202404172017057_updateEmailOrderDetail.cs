@@ -1,0 +1,18 @@
+namespace WebBanHangOnline.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class updateEmailOrderDetail : DbMigration
+    {
+        public override void Up()
+        {
+            AddColumn("dbo.tb_OrderDetail", "Email", c => c.String());
+        }
+        
+        public override void Down()
+        {
+            DropColumn("dbo.tb_OrderDetail", "Email");
+        }
+    }
+}

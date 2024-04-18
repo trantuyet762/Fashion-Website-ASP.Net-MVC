@@ -1,10 +1,10 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.ShoppingCartItem>
+﻿
     @using WebBanHangOnline.Common
 @{
     ViewBag.Title = "Index";
 }
 
-<link href="~/Content/assets/styles/categories_styles1.css" rel="stylesheet" />
+<link href="~/Content/assets/styles/categories_style.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_responsive.css">
 <div class="container product_section_container">
     <div class="row">
@@ -23,54 +23,29 @@
             <!-- Main Content -->
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table">
-                        <tr class="text-center">
-                            <th>STT</th>
-                            <th>Ảnh sản phẩm</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Danh mục</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                            <th>
+                    @if (ViewBag.CheckCart != null)
+                    {
+                    <div class="text-right">
 
-                            </th>
-                        </tr>
-                        @if (Model != null && Model.Any())
-                        {
-                            var i = 0;
-                            var tongtien = decimal.Zero;
-                            foreach (var item in Model)
-                            {
-                                tongtien += item.TotalPrice;
-                                <tr class="text-center" id="trow_@item.ProductId">
+                        <a href="#" class="btn btn-sm btn-danger btnDeleteAll">Xóa</a>
+                    </div>
+                    }
+                    
+                </div>
+                <div class="col-md-12" id="load_data">
+                    @Html.Action("Partial_Item_Cart", "ShoppingCart")
+                </div>
+                <div class="col-md-12">
+                    @if (ViewBag.CheckCart != null)
+                    {
+                        <div class="text-right">
 
-                                    <td>@(i+1)</td>
-                                    <td><img src="@item.ProductImg" width="60" /></td>
-                                    <td>
-                                        <a href="/chi-tiet/@item.Alias-p@(item.ProductId)">@item.ProductName</a>
-                                    </td>
-                                    <td>@item.CategoryName</td>
-                                    <td>@Common.FormatNumber(item.Price,0)</td>
-                                    <td>@item.Quantity</td>
-                                    <td>@Common.FormatNumber(item.TotalPrice,0)</td>
-                                    <td><a href="#" data-id="@item.ProductId " class="btn btn-sm btn-danger btnDelete">Xóa</a></td>
-                                </tr>
-                                i++;
-                            }
-                            <tr>
-                                <th colspan="6" class="text-right">Tổng: </th>
-                                <th class="text-center">@Common.FormatNumber(tongtien,0)</th>
-                            </tr>
 
-                        }
-            else
-                        {
-                            <tr>
-                                <td colspan="7">Không có sản phẩm trong giỏ hàng!</td>
-                            </tr>
-            }
-                    </table>
+                            <a href="/thanh-toan" class="btn btn-sm btn-danger">Thanh toán</a>
+
+                        </div>
+                    }
+
                 </div>
             </div>
        
