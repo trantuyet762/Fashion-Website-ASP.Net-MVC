@@ -27,6 +27,8 @@ namespace WebBanHangOnline.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        public DbSet<Sub> Subs { get; set; }
+       
         public DbSet<ThongKe> ThongKes { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Adv> Advs { get; set; }
@@ -39,7 +41,7 @@ namespace WebBanHangOnline.Models
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Subscribe> Subscribes { get; set; }
+      
        
         public static ApplicationDbContext Create()
         {

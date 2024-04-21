@@ -67,7 +67,7 @@
                         @using (Html.BeginForm("index", "New", FormMethod.Get, new { }))
                         {
                             <div class="input-group input-group-sm">
-                                @Html.TextBox("Searchtext", "",new { @class = "form-control" })
+                                @Html.TextBox("Searchtext", null,new { @class = "form-control" })
                                 @*<input type="text" class="form-control" />*@
                                 <span class="input-group-append">
                                     <button type="submit" class="btn btn-info btn-flat">Tìm kiếm</button>

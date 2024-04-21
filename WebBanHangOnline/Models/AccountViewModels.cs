@@ -49,37 +49,52 @@ namespace WebBanHangOnline.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Tên đăng nhập")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
-
-    public class RegisterViewModel
+    public class CreateAccountViewModel
     {
-        [Required]
+        [Display(Name = "Tên tài khoản")]
+        [Required(ErrorMessage = "Vui lòng nhập tên tài khoản")]
+
+        public string UserName { get; set; }
+        [Display(Name = "Họ tên")]
+        [Required(ErrorMessage = "Vui lòng nhập họ tên")]
+        public string FullName { get; set; }
+        [Display(Name = "Số điện thoại")]
+        public string Phone { get; set; }
+        [Display(Name = "Quyền")]
+        public string Role { get; set; }
+
+
+        
+       
+       
+        [Required(ErrorMessage = "Vui lòng nhập email")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
+        [StringLength(100, ErrorMessage = "Mật khẩu tối thiểu 6 ký tự", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Mật khẩu")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Nhập lại mật khẩu")]
+        [Compare("Password", ErrorMessage = "Mật khẩu nhập lại chưa đúng.")]
         public string ConfirmPassword { get; set; }
     }
+  
 
     public class ResetPasswordViewModel
     {

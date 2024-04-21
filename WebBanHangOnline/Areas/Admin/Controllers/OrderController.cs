@@ -12,6 +12,7 @@ using System.Data.Entity;
 using PagedList;
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

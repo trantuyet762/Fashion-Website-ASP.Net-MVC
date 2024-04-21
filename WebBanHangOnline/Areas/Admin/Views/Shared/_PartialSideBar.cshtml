@@ -57,6 +57,15 @@
             </ul>*@
             </li>
             <li class="nav-item">
+                <a href="/admin/role" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Phân Quyền
+                        @* <span class="right badge badge-danger">New</span>*@
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="/admin/new" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
@@ -69,7 +78,7 @@
                 <a href="/admin/order" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
-                       Đơn hàng
+                        Đơn hàng
                         @* <span class="right badge badge-danger">New</span>*@
                     </p>
                 </a>
@@ -84,10 +93,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/admin/account" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
-                        Quảng cáo
+                        Tài khoản
                     </p>
                 </a>
             </li>
@@ -125,8 +134,25 @@
                     </p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="javascript:document.getElementById('logOffForm').submit()" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                       Đăng xuất
+                       
+                    </p>
+                </a>
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
 </div>
 <!-- /.sidebar -->
+@if (Request.IsAuthenticated) {
+<div style="display:none">
+    @using (Html.BeginForm("Logoff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+    {
+    @Html.AntiForgeryToken()
+    }
+</div>
+}

@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using WebBanHangOnline.Common
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Colo Shop</title>
+    <title>TT Shop</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Colo Shop Template">
@@ -37,55 +38,44 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="top_nav_left">free shipping on all u.s orders over $50</div>
+                            <div class="top_nav_left">Hotline: 0862512098 </div>
                         </div>
-                        <div class="col-md-6 text-right">
-                            <div class="top_nav_right">
-                                <ul class="top_nav_menu">
+                        <div class="col-md-6 top_nav_right ">
 
-                                    <!-- Currency / Language / My Account -->
+                            <!-- Currency / Language / My Account -->
 
-                                    <li class="currency">
-                                        <a href="#">
-                                            usd
-                                            <i class="fa fa-angle-down"></i>
-                                        </a>
-                                        <ul class="currency_selection">
-                                            <li><a href="#">cad</a></li>
-                                            <li><a href="#">aud</a></li>
-                                            <li><a href="#">eur</a></li>
-                                            <li><a href="#">gbp</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="language">
-                                        <a href="#">
-                                            English
-                                            <i class="fa fa-angle-down"></i>
-                                        </a>
-                                        <ul class="language_selection">
-                                            <li><a href="#">French</a></li>
-                                            <li><a href="#">Italian</a></li>
-                                            <li><a href="#">German</a></li>
-                                            <li><a href="#">Spanish</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="account">
-                                        <a href="#">
-                                            My Account
-                                            <i class="fa fa-angle-down"></i>
-                                        </a>
-                                        <ul class="account_selection">
-                                            <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                                            <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+
+
+                            @if (!Request.IsAuthenticated)
+                            {
+                                <div class="row" style="height:50px; line-height:50px; justify-content: right;padding-right:15px;">
+                                    <div><a href="/account/dangnhap" style="color:#ffffff">Đăng nhập</a></div>
+                                    <div style="padding-left:30px;"><a href="/account/dangky" style="color:#ffffff">Đăng ký</a></div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row" style="height:50px; line-height:50px; justify-content: right;padding-right:15px;">
+                                    <div><a href="#" style="color:#ffffff">@User.Identity.Name</a></div>
+                                    <div style="padding-left:30px;"><a href="javascript:document.getElementById('logOffForm').submit()" style="color:#ffffff">Đăng xuất</a></div>
+                                </div>
+
+                            }
+
+
+                        </div>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <div style="display:none">
+                                @using (Html.BeginForm("Logoff", "Account", FormMethod.Post, new { @id = "logOffForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                }
                             </div>
-                        </div>
+                        }
                     </div>
+               </div>
                 </div>
-            </div>
-
             <!-- Main Navigation -->
 
             <div class="main_nav_container">
@@ -93,7 +83,7 @@
                     <div class="row">
                         <div class="col-lg-12 text-right">
                             <div class="logo_container">
-                                <a href="/">colo<span>shop</span></a>
+                                <a href="/">TT<span>shop</span></a>
                             </div>
                             <nav class="navbar">
                                 @Html.Action("MenuTop", "Menu")
@@ -118,54 +108,6 @@
 
         </header>
 
-        <div class="fs_menu_overlay"></div>
-        <div class="hamburger_menu">
-            <div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-            <div class="hamburger_menu_content text-right">
-                <ul class="menu_top_nav">
-                    <li class="menu_item has-children">
-                        <a href="#">
-                            usd
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="menu_selection">
-                            <li><a href="#">cad</a></li>
-                            <li><a href="#">aud</a></li>
-                            <li><a href="#">eur</a></li>
-                            <li><a href="#">gbp</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu_item has-children">
-                        <a href="#">
-                            English
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="menu_selection">
-                            <li><a href="#">French</a></li>
-                            <li><a href="#">Italian</a></li>
-                            <li><a href="#">German</a></li>
-                            <li><a href="#">Spanish</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu_item has-children">
-                        <a href="#">
-                            My Account
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="menu_selection">
-                            <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                            <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu_item"><a href="#">home</a></li>
-                    <li class="menu_item"><a href="#">shop</a></li>
-                    <li class="menu_item"><a href="#">promotion</a></li>
-                    <li class="menu_item"><a href="#">pages</a></li>
-                    <li class="menu_item"><a href="#">blog</a></li>
-                    <li class="menu_item"><a href="#">contact</a></li>
-                </ul>
-            </div>
-        </div>
 
         <!-- Slider -->
         @RenderBody()
@@ -174,26 +116,7 @@
         <!-- Benefit -->
         <!-- Newsletter -->
 
-        <div class="newsletter">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
-                            <h4>Newsletter</h4>
-                            <p>Subscribe to our newsletter and get 20% off your first purchase</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <form action="post">
-                            <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-                                <input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
-                                <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Action("Partial_Subscribe", "Home")
 
         <!-- Footer -->
 
@@ -224,7 +147,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="footer_nav_container">
-                            <div class="cr">©2018 All Rights Reserverd. Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#">Colorlib</a> &amp; distributed by <a href="https://themewagon.com">ThemeWagon</a></div>
+                            <div class="cr" style="padding-top: 50px; text-align:center">&copy; @DateTime.Now.ToString("yyyy") All Rights Reserverd <i class="fa fa-heart-o" aria-hidden="true"></i> <a href="#">TT</a>
                         </div>
                     </div>
                 </div>
@@ -233,7 +156,7 @@
 
     </div>
     @*    @Scripts.Render("~/bundles/jquery")*@
-    
+
     <script src="~/Content/assets/styles/bootstrap4/popper.js"></script>
     <script src="~/Content/assets/styles/bootstrap4/bootstrap.min.js"></script>
     <script src="~/Content/assets/plugins/Isotope/isotope.pkgd.min.js"></script>
@@ -243,6 +166,7 @@
     <script src="~/Content/assets/js/custom.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Scripts/jsShopping1.js"></script>
     @*<script src="~/Scripts/jsShopping.js"></script>*@
     @*   @Scripts.Render("~/bundles/bootstrap")*@

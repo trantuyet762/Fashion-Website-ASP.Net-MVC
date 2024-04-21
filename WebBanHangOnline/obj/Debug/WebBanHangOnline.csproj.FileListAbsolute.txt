@@ -122,17 +122,12 @@ E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.Configuration.Configu
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateProduct.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateProducts.resources
-E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.update54.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateCategory.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatecategory124.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateproductprice.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateCateProduct.resources
-E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.csproj.AssemblyReference.cache
-E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.price.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.price1.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.price2.resources
-E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addcart.resources
-E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addcart1.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatePayment.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.createTBThongKe.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateThongKe.resources
@@ -144,3 +139,6 @@ E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\bin\System.Data.SqlClient.xml
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateOrder.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatekey.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateEmailOrderDetail.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.settingsystem.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.csproj.AssemblyReference.cache
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.update.resources

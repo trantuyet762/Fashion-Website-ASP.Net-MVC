@@ -17,7 +17,7 @@ namespace WebBanHangOnline.Migrations
                     })
                 .PrimaryKey(t => t.id);
             
-            AddColumn("dbo.tb_Product", "ViewCount", c => c.Int(nullable: false));
+           
         }
         
         public override void Down()
