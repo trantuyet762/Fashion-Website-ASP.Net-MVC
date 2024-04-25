@@ -1,0 +1,60 @@
+﻿@model PagedList.PagedList<WebBanHangOnline.Models.EF.Post>
+@using PagedList.Mvc;
+@using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Bài viết";
+}
+<style>
+    .news_section_container {
+        margin-top: 180px;
+    }
+
+    .row-item-new {
+        margin-bottom: 20px;
+    }
+
+    .title-news {
+        font-size: 24px;
+        border-bottom: 1px solid;
+        padding: 15px 0;
+        margin-bottom: 25px;
+    }
+
+    .img-box img {
+        width: 200px;
+        max-height: 200px;
+    }
+</style>
+<link type="text/css" href="~/Content/assets/styles/main_style.css" rel="stylesheet" />
+<div class="container news_section_container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="title-news">Bài viết</h2>
+        </div>
+    </div>
+    <div class="title">
+        @if (Model != null && Model.Any())
+        {
+
+            foreach (var item in Model)
+            {
+        <div class="title-news" style="font-size:20px;">
+            <h3>
+                @item.Title
+            </h3>
+            <p>@item.Description</p>
+            <p>@Html.Raw(item.Detail)</p>
+        </div>
+
+                    }
+
+
+                    <div class="row" style="box-sizing:border-box; border-radius:4px; padding:10px;">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    </div>
+                    }
+                
+            </div>
+    </div>
+

@@ -1,6 +1,7 @@
 ﻿@model PagedList.PagedList<WebBanHangOnline.Models.EF.New>
 @using PagedList.Mvc;
 @using PagedList;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
     ViewBag.Title = "Tin tức";
 }
@@ -34,6 +35,7 @@
     </div>
     @if (Model != null && Model.Any())
     {
+
         foreach (var item in Model)
         {
             <div class="row row-item-new">
@@ -55,8 +57,9 @@
             </div>
 
         }
-        <div class="row">
-            @Html.PagedListPager(Model,page=>Url.Action("Index", new {Page}))
+
+        <div class="row" style="box-sizing:border-box; border-radius:4px; padding:10px;">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
     }
 </div>

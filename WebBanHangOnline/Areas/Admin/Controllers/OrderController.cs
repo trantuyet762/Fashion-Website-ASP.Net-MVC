@@ -12,7 +12,7 @@ using System.Data.Entity;
 using PagedList;
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+   /* [Authorize(Roles = "Admin")]*/
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -47,8 +47,8 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             if(item != null)
             {
                 db.Orders.Attach(item);
-                item.TypePayment = trangthai;
-                db.Entry(item).Property(x => x.TypePayment).IsModified = true;
+                item.Status = trangthai;
+                db.Entry(item).Property(x => x.Status).IsModified = true;
                 db.SaveChanges();
                 return Json(new { message = "Cập nhật thành công", Success = true });
             }

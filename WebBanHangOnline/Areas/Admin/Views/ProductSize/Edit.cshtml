@@ -1,0 +1,75 @@
+﻿@model WebBanHangOnline.Models.EF.ProductSizes
+@{
+    ViewBag.Title = "Edit";
+  
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Cập nhật size</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Size</a></li>
+                    <li class="breadcrumb-item active">Cập nhật</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Thông tin cập nhật size</h3>
+
+
+        </div>
+        <div class="card-body">
+            @if (Model != null)
+            {
+                <div class="bs-stepper-content">
+                    @using (Html.BeginForm("Edit", "ProductSize", FormMethod.Post, new { }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(x => x.id)
+                        @Html.HiddenFor(x => x.CreatedDate)
+                        <!-- your steps content here -->
+                        <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Mã size</label>
+                                @Html.TextBoxFor(x => x.id, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.id, null, new { @class = "text-danger" })
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tên size</label>
+                                @Html.TextBoxFor(x => x.SizeName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.SizeName, null, new { @class = "text-danger" })
+                            </div>
+                           
+                            <div class="form-group">
+                                <a href="/admin/productsize" class="btn btn-danger">Quay lại</a>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            }
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+
+

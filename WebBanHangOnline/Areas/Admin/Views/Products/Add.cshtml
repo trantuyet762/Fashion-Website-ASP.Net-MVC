@@ -96,7 +96,7 @@
                                             @Html.ValidationMessageFor(x => x.Detail, null, new { @class = "text-danger" })
                                         </div>
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Số lượng</label>
                                                     @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control ", @Value = "1" })
@@ -104,21 +104,29 @@
                                                 </div>
 
                                             </div>
-                                        
-                                            <div class="col-4">
+
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Giá </label>
-                                                    <input type="text" name="demoPrice" id="demoPrice" class="form-control auto" >
+                                                    <input type="text" name="demoPrice" id="demoPrice" class="form-control auto">
                                                     @Html.HiddenFor(x => x.Price, new { @class = "", @placeholder = "Giá " })
                                                     @Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail">Giá khuyến mãi</label>
                                                     <input type="text" name="demoPriceSale" id="demoPriceSale" value="" class="form-control auto">
                                                     @Html.HiddenFor(x => x.PriceSale, new { @class = "form-control", @placeholder = "Giá khuyến mãi" })
                                                     @Html.ValidationMessageFor(x => x.PriceSale, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail">Giá nhập</label>
+                                                    <input type="text" name="GiaNhap" id="GiaNhap" value="" class="form-control auto">
+                                                    @Html.HiddenFor(x => x.OriginalPrice, new { @class = "form-control", @placeholder = "Giá nhập" })
+                                                    @Html.ValidationMessageFor(x => x.OriginalPrice, null, new { @class = "text-danger" })
                                                 </div>
                                             </div>
                                         </div>
@@ -259,6 +267,11 @@
                 var demoGet = $('#demoPriceSale').autoNumeric('get');
                 $('#PriceSale').val(demoGet);
                 $('#PriceSale').autoNumeric('set', demoGet);
+            });
+            $('#GiaNhap').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#GiaNhap').autoNumeric('get');
+                $('#OriginalPrice').val(demoGet);
+                $('#OriginalPrice').autoNumeric('set', demoGet);
             });
 
 

@@ -12,7 +12,7 @@ using WebBanHangOnline.Models;
 
 namespace WebBanHangOnline.Controllers
 {
-    [Authorize]
+   /* [Authorize]*/
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;

@@ -13,7 +13,7 @@ using WebBanHangOnline.Models;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+/*    [Authorize(Roles = "Admin")]*/
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -145,7 +145,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRole(user.Id, model.Role);
+                   /* UserManager.AddToRole(user.Id, model.Role);*/
                    /* await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);*/
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

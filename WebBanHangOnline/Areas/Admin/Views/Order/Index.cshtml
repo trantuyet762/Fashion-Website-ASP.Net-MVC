@@ -38,6 +38,7 @@
                         <th>Tên khách hàng</th>
                         <th>Số điện thoại</th>
                         <th>Tổng tiền</th>
+                        <th>Phương thức thanh toán</th>
                         <th>Trạng thái</th>
                         <th>Ngày tạo</th>
                         <th></th>
@@ -55,8 +56,27 @@
                                 <td>@item.CustomerName</td>
                                 <td>@item.Phone</td>
                                 <td>@WebBanHangOnline.Common.Common.FormatNumber(@item.TotalAmount, 0) </td>
+
                                 <td>
-                                    @(item.TypePayment==1?"Chờ thanh toán":"Đã thanh toán")
+                                    @(item.TypePayment==1?"Thanh toán khi nhận hàng":"Chuyển khoản")
+                                </td>
+                                <td>
+                                    @if (item.Status == 1)
+                                    {
+                                        <span>Chưa thanh toán</span>
+                                    }
+                                    @if (item.Status == 2)
+                                    {
+                                        <span>Đã thanh toán</span>
+                                    }
+                                    @if (item.Status == 3)
+                                    {
+                                        <span>Hoàn thành</span>
+                                    }
+                                    @if (item.Status == 4)
+                                    {
+                                        <span>Hủy</span>
+                                    }
                                 </td>
                                 <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
                                 <td>
@@ -95,7 +115,7 @@
               <div class="form-group">
                   <label>Trạng thái</label>
                   <select class="form-control" id="ddTrangThai">
-                      <option value="1">Chờ thanh toán</option>
+                      <option value="1">Chưa thanh toán</option>
                       <option value="2">Đã thanh toán</option>
                   </select>
               </div>

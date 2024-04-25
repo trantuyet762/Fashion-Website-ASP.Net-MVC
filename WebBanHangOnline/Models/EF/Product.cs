@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Data.Entity.Spatial;
 namespace WebBanHangOnline.Models.EF
 {
     [Table("tb_Product")]
@@ -29,6 +29,7 @@ namespace WebBanHangOnline.Models.EF
         [AllowHtml]
         public string Detail { get; set; }
         public string Image { get; set; }
+        public decimal OriginalPrice { get; set; }
         public decimal Price { get; set; }
         public decimal? PriceSale { get; set; }
         public int Quantity { get; set; }
@@ -39,13 +40,17 @@ namespace WebBanHangOnline.Models.EF
         public bool IsHot { get; set; }
         public bool IsActive { get; set; }
         public int ProductCategoryID { get; set; }
+        public int ProductSizeID { get; set; }
         [StringLength(250)]
         public string SeoTitle { get; set; }
         [StringLength(500)]
         public string SeoDescription { get; set; }
         [StringLength(250)]
         public string SeoKeyWords { get; set; }
+    
         public virtual ProductCategory ProductCategory { get; set; }
+        public virtual ProductSizes ProductSizes { get; set; }
+
         public virtual ICollection<ProductImage> ProductImage { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

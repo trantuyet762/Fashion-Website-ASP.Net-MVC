@@ -4,15 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-
+using System.Data.Entity.Spatial;
 namespace WebBanHangOnline.Models.EF
 {
     [Table("tb_ProductCategory")]
     public class ProductCategory:CommonAbstract
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductCategory()
         {
-            this.Products = new HashSet<Product>();
+            Products = new HashSet<Product>();
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -36,6 +37,7 @@ namespace WebBanHangOnline.Models.EF
       
         [StringLength(250)]
         public string SeoKeyWords { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ICollection<Product> Products { get; set; }
     }
 }

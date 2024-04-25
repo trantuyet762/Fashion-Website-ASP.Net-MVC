@@ -9,6 +9,8 @@
                 </div>
             </div>
             <div class="col-lg-6">
+
+
                 @using (Ajax.BeginForm("Subscribe", "Home", new AjaxOptions
                 {
                     OnBegin = "OnBeginSub",
@@ -27,12 +29,12 @@
                         }
                     }
                     function OnFailureSub(rs) {
-
+                       
                     }
                 </script>
                     <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
 
-                        <input id="newsletter_email" name="Email" type="email" placeholder="Your email" required="required" data-error="Bạn phải nhập email." />
+                        <input id="newsletter_email" name="Email" type="email" placeholder="Your email" required="required" data-error="Bạn phải nhập email." title="Vui lòng nhập lại email!"/>
                             <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
                     </div>
 
