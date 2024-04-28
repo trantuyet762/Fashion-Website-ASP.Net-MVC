@@ -68,7 +68,7 @@
                     <div class="free_delivery d-flex flex-row align-items-center justify-content-center">
                         <span class="ti-truck"></span><span>free delivery</span>
                     </div>
-                    <hr/>
+                    <hr />
                     <p>Lượt xem: <b>@Model.ViewCount</b><i class="fa fa-eye" aria-hidden="true" style="padding-left: 5px;"></i></p>
                     @if (Model.PriceSale < Model.Price)
                     {
@@ -87,6 +87,18 @@
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
                     </ul>
+                    <div class="product-detail-size">
+                        <label for="size">Select Size:</label>
+                        <select id="size" name="size">
+                            <option value="">-- Select size --</option>
+                            @foreach (var productSize in Model.ProductSizes)
+                            {
+                                <option id="size_@productSize.SizeID" value="@productSize.SizeID">@productSize.Size.SizeName</option>
+                            }
+                        </select>
+                    </div>
+
+
                     <div class="product_color">
                         <span>Select Color:</span>
                         <ul>

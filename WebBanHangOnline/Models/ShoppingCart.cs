@@ -1,7 +1,8 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebBanHangOnline.Migrations;
 
 namespace WebBanHangOnline.Models
 {
@@ -14,9 +15,10 @@ namespace WebBanHangOnline.Models
         }
         public void AddToCart(ShoppingCartItem item, int Quantity)
         {
-            var checkExits = items.FirstOrDefault(x => x.ProductId == item.ProductId);
+            var checkExits = items.FirstOrDefault(x => x.ProductId == item.ProductId && x.SizeId== item.SizeId);
             if(checkExits!= null)
             {
+               
                 checkExits.Quantity += Quantity;
                 checkExits.TotalPrice = checkExits.Price * checkExits.Quantity;
             }
@@ -34,16 +36,17 @@ namespace WebBanHangOnline.Models
              
             }
         }
-        public void UpdateQuantity(int id, int quantity)
-        {
-            var checkExits = items.SingleOrDefault(x => x.ProductId == id);
-            if (checkExits != null)
-            {
-                checkExits.Quantity = quantity;
-                checkExits.TotalPrice = checkExits.Price * checkExits.Quantity;
 
+        public void UpdateQuantity(int productId, int quantity, int sizeId)
+        {
+            var itemToUpdate = items.FirstOrDefault(x => x.ProductId == productId && x.SizeId == sizeId);
+            if (itemToUpdate != null)
+            {
+                itemToUpdate.Quantity = quantity;
+                itemToUpdate.TotalPrice = itemToUpdate.Price * itemToUpdate.Quantity;
             }
         }
+
         public decimal GetTotalPrice()
         {
             return items.Sum(x => x.TotalPrice);
@@ -60,8 +63,10 @@ namespace WebBanHangOnline.Models
     public class ShoppingCartItem
     {
         public int ProductId { get; set; }
+        public int SizeId { get; set; }
         public string ProductName { get; set; }
         public string Alias { get; set; }
+        public string SizeName { get; set; }
         public string CategoryName { get; set; }
         public string ProductImg { get; set; }
         public int Quantity { get; set; }

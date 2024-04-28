@@ -13,6 +13,7 @@ namespace WebBanHangOnline.Models.EF
     {
         public Product()
         {
+            this.ProductSizes = new HashSet<ProductSize>();
             this.ProductImage = new HashSet<ProductImage>();
             this.OrderDetails = new HashSet<OrderDetail>();
         }
@@ -40,7 +41,7 @@ namespace WebBanHangOnline.Models.EF
         public bool IsHot { get; set; }
         public bool IsActive { get; set; }
         public int ProductCategoryID { get; set; }
-        public int ProductSizeID { get; set; }
+      
         [StringLength(250)]
         public string SeoTitle { get; set; }
         [StringLength(500)]
@@ -49,8 +50,8 @@ namespace WebBanHangOnline.Models.EF
         public string SeoKeyWords { get; set; }
     
         public virtual ProductCategory ProductCategory { get; set; }
-        public virtual ProductSizes ProductSizes { get; set; }
 
+        public ICollection<ProductSize> ProductSizes { get; set; }
         public virtual ICollection<ProductImage> ProductImage { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

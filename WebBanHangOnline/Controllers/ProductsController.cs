@@ -27,8 +27,8 @@ namespace WebBanHangOnline.Controllers
                 
                 db.SaveChanges();
             }
-           
-            
+
+            ViewBag.ProductSize = new SelectList(db.ProductSizes.ToList(), "ProductID", "SizeName");
             return View(item);
         }
         public ActionResult ProductCategory(string alias,int id)

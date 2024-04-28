@@ -1,6 +1,6 @@
-﻿@model WebBanHangOnline.Models.EF.ProductSize
+﻿@model WebBanHangOnline.Models.EF.Size
 @{
-    ViewBag.Title = "Cập nhật";
+    ViewBag.Title = "Size";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
             <a href="/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/productsize" class="nav-link">Sản phẩm</a>
+            <a href="/admin/productcategory" class="nav-link">Size</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Cập nhật</a>
@@ -26,11 +26,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Cập nhật sản phẩm</h1>
+                <h1>Cập nhật size</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
+                    <li class="breadcrumb-item"><a href="#">Size</a></li>
                     <li class="breadcrumb-item active">Cập nhật</li>
                 </ol>
             </div>
@@ -43,16 +43,15 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Thông tin sản phẩm</h3>
+            <h3 class="card-title">Thông tin cập nhật size</h3>
 
 
         </div>
-
         <div class="card-body">
             @if (Model != null)
             {
                 <div class="bs-stepper-content">
-                    @using (Html.BeginForm("Edit", "ProductSize", FormMethod.Post, new { }))
+                    @using (Html.BeginForm("Edit", "Size", FormMethod.Post, new { }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
@@ -62,37 +61,28 @@
                         <div id="logins-part" class="content active dstepper-block" role="tabpanel" aria-labelledby="logins-part-trigger">
 
                             <div class="form-group">
-                                <label for="exampleInputEmail">Tên </label>
-                                @Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Tiêu đề" })
-                                @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+                                <label for="exampleInputEmail1">Tên Size</label>
+                                @Html.TextBoxFor(x => x.SizeName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.SizeName, null, new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail">Sản phẩm</label>
-                                @Html.DropDownListFor(x => x.ProductID, ViewBag.Product as SelectList, "- Chọn sản phẩm - ", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.ProductID, null, new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail">Tên size</label>
-                                @Html.DropDownListFor(x => x.SizeID, ViewBag.Size as SelectList, "- Chọn size - ", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.SizeID, null, new { @class = "text-danger" })
-                            </div>
-
-                            <div class="form-group">
-                                <a href="/admin/productsize" class="btn btn-danger">Quay lại</a>
+                                <a href="/admin/size" class="btn btn-danger">Quay lại</a>
                                 <button type="submit" class="btn btn-primary">Lưu</button>
                             </div>
+                        </div>
 
-
-                            <!-- /.tab-content -->
-                        </div><!-- /.card-body -->
                     }
                 </div>
             }
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
 
         </div>
-
-
+        <!-- /.card-footer-->
     </div>
+    <!-- /.card -->
+
 </section>
 

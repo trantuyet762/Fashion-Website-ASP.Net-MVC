@@ -7,78 +7,66 @@ using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
-    public class ProductSizeController : Controller
+    public class SizeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Admin/ProductSize
+        // GET: Admin/Size
         public ActionResult Index()
         {
-            var items = db.ProductSizes;
+            var items = db.Sizes;
             return View(items);
         }
         public ActionResult Add()
         {
-
-            ViewBag.Product = new SelectList(db.Products.ToList(), "id", "Title");
-            ViewBag.Size = new SelectList(db.Sizes.ToList(), "id", "SizeName");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ProductSize model)
+        public ActionResult Add(Size model)
         {
             if (ModelState.IsValid)
             {
 
 
 
-                db.ProductSizes.Add(model);
+                db.Sizes.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-
             }
-            ViewBag.Product = new SelectList(db.Products.ToList(), "id", "Title");
-            ViewBag.Size = new SelectList(db.Sizes.ToList(), "id", "TenSize");
-
-            return View(model);
+            return View();
         }
         public ActionResult Edit(int id)
         {
-            ViewBag.Product = new SelectList(db.Products.ToList(), "id", "Title");
-            ViewBag.Size = new SelectList(db.Sizes.ToList(), "id", "SizeName");
-            var item = db.ProductSizes.Find(id);
-
+            var item = db.Sizes.Find(id);
             return View(item);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ProductSize model)
+        public ActionResult Edit(Size model)
         {
             if (ModelState.IsValid)
             {
 
-                db.ProductSizes.Attach(model);
+
+
+                db.Sizes.Attach(model);
                 db.Entry(model).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(model);
         }
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var item = db.ProductSizes.Find(id);
+            var item = db.Sizes.Find(id);
             if (item != null)
             {
-                db.ProductSizes.Remove(item);
+                db.Sizes.Remove(item);
                 db.SaveChanges();
                 return Json(new { success = true });
             }
             return Json(new { success = false });
-        
-
-
+        }
     }
-}
 }

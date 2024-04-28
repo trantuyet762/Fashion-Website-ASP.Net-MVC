@@ -210,6 +210,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductSizeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeDoanhThuController.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\SettingHelper.cs" />
@@ -341,6 +342,18 @@
     <Compile Include="Migrations\202404241851296_updatesizeTT.Designer.cs">
       <DependentUpon>202404241851296_updatesizeTT.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404260456005_update2642.cs" />
+    <Compile Include="Migrations\202404260456005_update2642.Designer.cs">
+      <DependentUpon>202404260456005_update2642.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404260800544_updatecarrt.cs" />
+    <Compile Include="Migrations\202404260800544_updatecarrt.Designer.cs">
+      <DependentUpon>202404260800544_updatecarrt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404260906156_updatecart.cs" />
+    <Compile Include="Migrations\202404260906156_updatecart.Designer.cs">
+      <DependentUpon>202404260906156_updatecart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common\Filter.cs" />
@@ -357,7 +370,8 @@
     <Compile Include="Models\EF\Product.cs" />
     <Compile Include="Models\EF\ProductCategory.cs" />
     <Compile Include="Models\EF\ProductImage.cs" />
-    <Compile Include="Models\EF\ProductSizes.cs" />
+    <Compile Include="Models\EF\ProductSize.cs" />
+    <Compile Include="Models\EF\Size.cs" />
     <Compile Include="Models\EF\Sub.cs" />
     <Compile Include="Models\EF\SystemSetting.cs" />
     <Compile Include="Models\EF\ThongKe.cs" />
@@ -3517,7 +3531,6 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_PartialSideBar.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
@@ -3619,9 +3632,13 @@
     <Content Include="Content\assets\plugins\moment\locales.min.js.map" />
     <Content Include="Content\assets\plugins\moment\moment-with-locales.min.js.map" />
     <Content Include="Content\assets\plugins\moment\moment.min.js.map" />
+    <Content Include="Areas\Admin\Views\Shared\_PartialSideBar.cshtml" />
     <Content Include="Areas\Admin\Views\ProductSize\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductSize\Add.cshtml" />
     <Content Include="Areas\Admin\Views\ProductSize\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Size\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Size\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Size\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3634,6 +3651,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js.js" />
     <Content Include="Scripts\jsShopping.js" />
     <Content Include="Scripts\jsShopping1.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -3844,6 +3862,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404241851296_updatesizeTT.resx">
       <DependentUpon>202404241851296_updatesizeTT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404260456005_update2642.resx">
+      <DependentUpon>202404260456005_update2642.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404260800544_updatecarrt.resx">
+      <DependentUpon>202404260800544_updatecarrt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404260906156_updatecart.resx">
+      <DependentUpon>202404260906156_updatecart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.ChangeModels.resources" />
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.CreatedDatabase.resources" />

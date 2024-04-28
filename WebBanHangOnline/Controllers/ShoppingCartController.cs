@@ -214,64 +214,63 @@ namespace WebBanHangOnline.Controllers
             return Json(code);
         }
         [HttpPost]
-        public ActionResult AddToCart(int id, int quantity)
+        public ActionResult AddToCart(int id, int quantity, int size)
         {
             var code = new { Success = false, msg = "", code = -1, Count = 0 };
             var db = new ApplicationDbContext();
             var checkProduct = db.Products.FirstOrDefault(x => x.id == id);
-            if (checkProduct != null)
+            var checkSize = db.ProductSizes.FirstOrDefault(x => x.SizeID == size); // Lấy size mới được chọn
+
+            if (checkProduct != null && checkSize != null)
             {
                 ShoppingCart cart = (ShoppingCart)Session["Cart"];
                 if (cart == null)
                 {
                     cart = new ShoppingCart();
                 }
-                ShoppingCartItem item = new ShoppingCartItem
-                {
-                    ProductId = checkProduct.id,
-                    ProductName = checkProduct.Title,
-                    CategoryName = checkProduct.ProductCategory.Title,
-                    Alias = checkProduct.Alias,
-                    Quantity = quantity
-                };
 
-                if (checkProduct.ProductImage.FirstOrDefault(x => x.IsDefault) != null)
+                // Kiểm tra xem có sản phẩm trong giỏ hàng có cùng ProductId và SizeID không
+                var existingCartItem = cart.items.FirstOrDefault(item => item.ProductId == id && item.SizeId == size);
+
+                if (existingCartItem != null)
                 {
-                    item.ProductImg = checkProduct.ProductImage.FirstOrDefault(x => x.IsDefault).Image;
+                    // Nếu có, chỉ cần tăng số lượng
+                    existingCartItem.Quantity += quantity;
+                    existingCartItem.TotalPrice = existingCartItem.Price * existingCartItem.Quantity;
                 }
-                item.Price = checkProduct.Price;
-                if (checkProduct.PriceSale > 0)
+                else
                 {
-                    item.Price = (decimal)checkProduct.PriceSale;
+                    // Nếu không, tạo một sản phẩm mới và thêm vào giỏ hàng
+                    ShoppingCartItem item = new ShoppingCartItem
+                    {
+                        ProductId = checkProduct.id,
+                        ProductName = checkProduct.Title,
+                        SizeName = checkSize.Size.SizeName,
+                        SizeId = size, // Lưu SizeID của sản phẩm
+                        CategoryName = checkProduct.ProductCategory.Title,
+                        Quantity = quantity
+                    };
+
+                    if (checkProduct.ProductImage.FirstOrDefault(x => x.IsDefault) != null)
+                    {
+                        item.ProductImg = checkProduct.ProductImage.FirstOrDefault(x => x.IsDefault).Image;
+                    }
+                    item.Price = checkProduct.Price;
+                    if (checkProduct.PriceSale > 0)
+                    {
+                        item.Price = (decimal)checkProduct.PriceSale;
+                    }
+                    item.TotalPrice = item.Quantity * item.Price;
+
+                    cart.AddToCart(item,quantity);
                 }
-                item.TotalPrice = item.Quantity * item.Price;
-                cart.AddToCart(item, quantity);
+
                 Session["Cart"] = cart;
                 code = new { Success = true, msg = "Thêm thành công! ", code = 1, Count = cart.items.Count };
             }
             return Json(code);
         }
 
-        [HttpPost]
-        public ActionResult Delete(int id)
-        {
-            var code = new { Success = false, msg = "", code = -1, Count = 0 };
-            ShoppingCart cart = (ShoppingCart)Session["Cart"];
-            if (cart != null)
-            {
-                var checkProduct = cart.items.FirstOrDefault(x => x.ProductId == id);
-                if (checkProduct != null)
-                {
-                    cart.Remove(id);
-                    code = new { Success = true, msg = "", code = 1, Count = cart.items.Count };
-                }
-
-
-
-
-            }
-            return Json(code);
-        }
 
         [HttpPost]
         public ActionResult DeleteAll()
@@ -285,17 +284,16 @@ namespace WebBanHangOnline.Controllers
             return Json(new { Success = false });
         }
         [HttpPost]
-        public ActionResult Update(int id, int quantity)
+        public ActionResult Update(int id, int quantity, int sizeId)
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
             if (cart != null)
             {
-                cart.UpdateQuantity(id, quantity);
+                cart.UpdateQuantity(id, quantity, sizeId);
                 return Json(new { Success = true });
             }
             return Json(new { Success = false });
         }
-
 
 
         #region Thanh toán vnpay

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebBanHangOnline.Models.ShoppingCartItem>
+
     @using WebBanHangOnline.Common
 <table class="table">
   
@@ -7,6 +8,7 @@
         <th>Ảnh sản phẩm</th>
         <th>Tên sản phẩm</th>
         <th>Danh mục</th>
+        <th>Kích thước</th>
         <th>Giá</th>
         <th style="width: 100px;">Số lượng</th>
         <th>Thành tiền</th>
@@ -21,7 +23,7 @@
         foreach (var item in Model)
         {
             tongtien += item.TotalPrice;
-            <tr class="text-center" id="trow_@item.ProductId">
+<tr class="text-center" data-product-id="@item.ProductId" data-size-id="@item.SizeId">
 
                 <td>@(i+1)</td>
                 <td><img src="@item.ProductImg" width="60" /></td>
@@ -29,8 +31,9 @@
                     <a href="/chi-tiet/@item.Alias-p@(item.ProductId)"  style="color: #000000" >@item.ProductName</a>
                 </td>
                 <td>@item.CategoryName</td>
+                <td>@item.SizeName</td>
                 <td>@Common.FormatNumber(item.Price, 0)</td>
-                <td><input class="form-control" type="number" min="0"  value="@item.Quantity" id="Quantity_@item.ProductId" /></td>
+                <td><input class="form-control quantity-input" type="number" min="0"  value="@item.Quantity" id="Quantity_@item.ProductId" /></td>
                 <td>@Common.FormatNumber(item.TotalPrice, 0)</td>
                 <td class="text-right" style="padding:0px;">
                     <a href="#" data-id="@item.ProductId " class="btn btn-sm btn-danger btnDelete">Xóa</a>

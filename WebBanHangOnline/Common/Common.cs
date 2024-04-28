@@ -17,7 +17,7 @@ namespace WebBanHangOnline.Common
         public static bool SendMail(string name, string subject, string content,
             string toMail)
         {
-        bool rs = false;
+            bool rs = false;
             try
             {
                 MailMessage message = new MailMessage();
@@ -29,9 +29,10 @@ namespace WebBanHangOnline.Common
                     smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
 
                     smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential() { 
-                        UserName=Email,
-                        Password=password
+                    smtp.Credentials = new NetworkCredential()
+                    {
+                        UserName = Email,
+                        Password = password
                     };
                 }
                 MailAddress fromAddress = new MailAddress(Email, name);

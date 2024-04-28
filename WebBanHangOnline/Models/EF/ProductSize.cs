@@ -7,21 +7,16 @@ using System.Web;
 
 namespace WebBanHangOnline.Models.EF
 {
-    public class ProductSizes:CommonAbstract
+    [Table("tb_ProductSize")]
+    public class ProductSize
     {
-        public ProductSizes()
-        {
-            Products = new HashSet<Product>();
-        }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-       
-        [StringLength(250)]
         public string Title { get; set; }
-        [Required]
-        [StringLength(150)]
-        public string SizeName { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public int ProductID { get; set; }
+        public int SizeID { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual Size Size { get; set; }
     }
 }

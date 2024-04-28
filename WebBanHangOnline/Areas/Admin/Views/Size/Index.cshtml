@@ -1,10 +1,9 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.EF.ProductSize>
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.Size>
 
 @{
-    ViewBag.Title = "Sản phẩm";
+    ViewBag.Title = "Size";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
 
 @section naviheader{
     <!-- Left navbar links -->
@@ -16,7 +15,7 @@
             <a href="/admin/home" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/productsize" class="nav-link">Sản phẩm</a>
+            <a href="/admin/size" class="nav-link">Size</a>
         </li>
     </ul>
 }
@@ -25,12 +24,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý sản phẩm</h1>
+                <h1>Quản lý size</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Sản phẩm</li>
+                    <li class="breadcrumb-item active">Size</li>
                 </ol>
             </div>
         </div>
@@ -43,12 +42,17 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách Sản phẩm</h3>
+            <h3 class="card-title">Danh sách Size</h3>
 
             <div class="card-tools">
-                <a href="/admin/productsize/add" class="btn btn-primary">Thêm mới</a>
+                <a href="/admin/size/add" class="btn btn-primary">Thêm mới</a>
                 <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
-               
+                @*  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>*@
             </div>
         </div>
         <div class="card-body">
@@ -59,8 +63,8 @@
                         <th><input type="checkbox" id="SelectAll" /></th>
                         <th>STT</th>
 
-                        <th>Tên sản phẩm</th>
                         <th>Tên Size</th>
+
 
                         <th></th>
                     </tr>
@@ -79,14 +83,13 @@
                                 <td>@i</td>
 
 
-                                <td>@item.Product.Title</td>
-                                <td>@item.Size.SizeName</td>
+                                <td>@item.SizeName</td>
                                 @*<td>
                                         <a href="#" data-id="@item.id" class="btnActive">@Html.Raw(strCheck)</a>
 
                                     </td>*@
                                 <td>
-                                    <a href="/admin/productsize/edit/@item.id" class="btn btn-sm btn-warning">Sửa</a>
+                                    <a href="/admin/size/edit/@item.id" class="btn btn-sm btn-warning">Sửa</a>
                                     <a href="#" data-id="@item.id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
                                 </td>
                             </tr>
@@ -113,30 +116,29 @@
     <!-- /.card -->
 
 </section>
+<!-- /.content -->
 @section scripts{
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
 
-
-        $('body').on('click', '.btnDelete', function () {
-            var id = $(this).data("id");
-            var conf = confirm('Bạn có muốn xóa bản ghi này không?');
-            if (conf == true) {
-                $.ajax({
-                    url: '/admin/productsize/delete',
-                    type: 'POST',
-                    data: { id: id },
-                    success: function (rs) {
-                        if (rs.success) {
-                            $('#trow_' + id).remove();
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Bạn có muốn xóa bản ghi này không?');
+                if (conf == true) {
+                    $.ajax({
+                        url: '/admin/size/delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
                         }
-                    }
-                });
-            }
-        });
-
-
+                    });
+                }
+            });
 
     </script>
 }
+
+
 

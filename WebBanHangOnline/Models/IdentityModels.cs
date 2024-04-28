@@ -41,7 +41,9 @@ namespace WebBanHangOnline.Models
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<ProductSizes> ProductSizes { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

@@ -20,7 +20,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
         // GET: Admin/Products
         public ActionResult Index(int? page)
         {
-            IEnumerable<Product> items = db.Products.Include(x=>x.ProductSizes).OrderByDescending(x => x.id).ToList();
+            IEnumerable<Product> items = db.Products.OrderByDescending(x => x.id).ToList();
             var pageSize = 5;
             if(page== null)
             {
@@ -36,10 +36,10 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
        
         public ActionResult Add()
         {
-            Product p = new Product();
+           
             ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "id", "Title");
-            ViewBag.ProductSizeID = new SelectList(db.ProductSizes, "id", "SizeName");
-            return View(p);
+            
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -88,7 +88,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
 
             }
             ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "id", "Title");
-            ViewBag.ProductSizeID = new SelectList(db.ProductSizes, "id", "SizeName", model.ProductSizes);
+           
             return View(model);
         }
         public ActionResult Edit(int id)
@@ -96,12 +96,12 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             ViewBag.ProductCategory = new SelectList(db.ProductCategories.ToList(), "id", "Title");
             
             var item = db.Products.Find(id);
-            ViewBag.ProductSizeID = new SelectList(db.ProductSizes, "id", "SizeName", item.ProductSizes);
+          
             return View(item);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductSizeID")] Product model)
+        public ActionResult Edit( Product model)
         {
             if (ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProductSizeID = new SelectList(db.ProductSizes, "id", "SizeName", model.ProductSizes);
+            
             return View(model);
         }
         [HttpPost]
