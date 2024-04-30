@@ -1,14 +1,17 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.EF.OrderDetail>
+﻿@model IEnumerable < WebBanHangOnline.Models.EF.OrderDetail>
 @if (Model != null && Model.Any())
-{ 
+{
+
     var tongtien = decimal.Zero;
-    
+
     int i= 1;
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Tên sản phẩm</th>
+                <th>Size</th>
+                <th>Màu</th>
                 <th>Giá</th>
                 <th>Số lượng</th>
                 <th>Thành tiền</th>
@@ -20,11 +23,16 @@
             @foreach (var item in Model)
 
             {
+               
                 var thanhtien = item.Price * item.Quantity;
                 tongtien += thanhtien;
                 <tr>
                     <td>@i</td>
                     <td>@item.Product.Title</td>
+                    <td>
+                       @item.SizeName
+                    </td>
+                    <td>@item.ColorName</td>
                     <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price, 0)</td>
                     <td>@item.Quantity</td>
                     <td>@WebBanHangOnline.Common.Common.FormatNumber((item.Price * item.Quantity), 0)</td>
@@ -33,7 +41,7 @@
                 i++;
             }
             <tr>
-                <th colspan="4" class="text-right">Tổng: </th>
+                <th colspan="6" class="text-right">Tổng: </th>
                 <th>@WebBanHangOnline.Common.Common.FormatNumber(tongtien, 0)</th>
             </tr>
 

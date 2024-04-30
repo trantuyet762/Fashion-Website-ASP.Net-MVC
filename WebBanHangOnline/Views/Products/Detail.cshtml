@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Chi tiết sản phẩm";
 }
-<link type="text/css" href="~/Content/assets/styles/detail_style.css" rel="stylesheet" />
+<link href="~/Content/assets/styles/detail_styles.css" rel="stylesheet" />
 
 <link type="text/css" href="~/Content/assets/styles/single_responsive1.css" rel="stylesheet" />
 @if (Model != null)
@@ -87,28 +87,31 @@
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
                     </ul>
+                    <hr />
                     <div class="product-detail-size">
-                        <label for="size">Select Size:</label>
+                        <label for="size">Chọn Size:</label>
                         <select id="size" name="size">
-                            <option value="">-- Select size --</option>
+                            <option value="">-- Chọn size --</option>
                             @foreach (var productSize in Model.ProductSizes)
                             {
                                 <option id="size_@productSize.SizeID" value="@productSize.SizeID">@productSize.Size.SizeName</option>
                             }
                         </select>
                     </div>
+                    <hr />
 
-
-                    <div class="product_color">
-                        <span>Select Color:</span>
-                        <ul>
-                            <li style="background: #e54e5d"></li>
-                            <li style="background: #252525"></li>
-                            <li style="background: #60b3f3"></li>
-                        </ul>
+                    <div class="product-detail-color">
+                        <label for="color">Chọn màu:</label>
+                        <select id="color" name="color">
+                            <option value="">-- Chọn màu --</option>
+                            @foreach (var productColor in Model.ProductColors)
+                            {
+                                <option id="color_@productColor.ColorID" value="@productColor.ColorID"> @productColor.Color.ColorName</option>
+                            }
+                        </select>
                     </div>
                     <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                        <span>Quantity:</span>
+                        <span id="quantity-span">Quantity:</span>
                         <div class="quantity_selector">
                             <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
                             <span id="quantity_value">1</span>
@@ -127,9 +130,9 @@
                     <div class="col">
                         <div class="tabs_container">
                             <ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
-                                <li class="tab active" data-active-tab="tab_1"><span>Description</span></li>
+                                <li class="tab active" data-active-tab="tab_1"><span>Chi tiết sản phẩm</span></li>
                                 @* <li class="tab" data-active-tab="tab_2"><span>Additional Information</span></li>*@
-                                <li class="tab" data-active-tab="tab_3"><span>Reviews (2)</span></li>
+                                <li class="tab" data-active-tab="tab_3"><span>Đánh giá</span></li>
                             </ul>
                         </div>
                     </div>
@@ -141,7 +144,7 @@
 
                         <div id="tab_1" class="tab_container active">
                             <div class="column">
-                              @Html.Raw(Model.Detail)
+                                @Html.Raw(Model.Detail)
                             </div>
                         </div>
 
@@ -150,90 +153,24 @@
 
                         <div id="tab_3" class="tab_container">
                             <div class="row">
+                              
+                                <!-- Add Review -->
+                                <div class="col-md-12 reviews_col">
+
+                                    @Html.Action("_Review", "Review", new { productId = Model.id })
+                                </div>
+                            </div>
+                            <div class="row">
 
                                 <!-- User Reviews -->
 
                                 <div class="col-lg-6 reviews_col">
-                                    <div class="tab_title reviews_title">
-                                        <h4>Reviews (2)</h4>
-                                    </div>
-
-                                    <!-- User Review -->
-
-                                    <div class="user_review_container d-flex flex-column flex-sm-row">
-                                        <div class="user">
-                                            <div class="user_pic"></div>
-                                            <div class="user_rating">
-                                                <ul class="star_rating">
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="review">
-                                            <div class="review_date">27 Aug 2016</div>
-                                            <div class="user_name">Brandon William</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- User Review -->
-
-                                    <div class="user_review_container d-flex flex-column flex-sm-row">
-                                        <div class="user">
-                                            <div class="user_pic"></div>
-                                            <div class="user_rating">
-                                                <ul class="star_rating">
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="review">
-                                            <div class="review_date">27 Aug 2016</div>
-                                            <div class="user_name">Brandon William</div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </div>
-                                    </div>
+                                    @Html.Action("Load_Review", "Review", new { productId = Model.id })
                                 </div>
 
-                                <!-- Add Review -->
-
-                                <div class="col-lg-6 add_review_col">
-
-                                    <div class="add_review">
-                                        <form id="review_form" action="post">
-                                            <div>
-                                                <h1>Add Review</h1>
-                                                <input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-                                                <input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
-                                            </div>
-                                            <div>
-                                                <h1>Your Rating:</h1>
-                                                <ul class="user_star_rating">
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                                </ul>
-                                                <textarea id="review_message" class="input_review" name="message" placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
-                                            </div>
-                                            <div class="text-left text-sm-right">
-                                                <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                </div>
 
                             </div>
+
                         </div>
 
 
@@ -248,4 +185,5 @@
 
 @section scripts{
     <script src="~/Content/assets/js/single_custom.js"></script>
+  
 }

@@ -5,13 +5,14 @@
   
     <tr class="text-center">
         <th>STT</th>
-        <th>Ảnh sản phẩm</th>
-        <th>Tên sản phẩm</th>
-        <th>Danh mục</th>
-        <th>Kích thước</th>
-        <th>Giá</th>
-        <th style="width: 100px;">Số lượng</th>
-        <th>Thành tiền</th>
+        <th>Ảnh sản phẩm </th>
+        <th>Tên sản phẩm </th>
+        <th>Danh mục </th>
+        <th>Kích thước </th>
+        <th>Màu </th>
+        <th>Giá </th>
+        <th style="width: 100px;">Số lượng </th>
+        <th>Thành tiền </th>
         <th style="width:200px;">
             
         </th>
@@ -23,7 +24,7 @@
         foreach (var item in Model)
         {
             tongtien += item.TotalPrice;
-<tr class="text-center" data-product-id="@item.ProductId" data-size-id="@item.SizeId">
+<tr class="text-center" data-product-id="@item.ProductId" data-size-id="@item.SizeId" data-color-id="@item.ColorId">
 
                 <td>@(i+1)</td>
                 <td><img src="@item.ProductImg" width="60" /></td>
@@ -32,10 +33,11 @@
                 </td>
                 <td>@item.CategoryName</td>
                 <td>@item.SizeName</td>
+                <td>@item.ColorName</td>
                 <td>@Common.FormatNumber(item.Price, 0)</td>
                 <td><input class="form-control quantity-input" type="number" min="0"  value="@item.Quantity" id="Quantity_@item.ProductId" /></td>
                 <td>@Common.FormatNumber(item.TotalPrice, 0)</td>
-                <td class="text-right" style="padding:0px;">
+                <td class="text-right" style="padding:0px; padding-top: 12px;">
                     <a href="#" data-id="@item.ProductId " class="btn btn-sm btn-danger btnDelete">Xóa</a>
                     <a href="#" data-id="@item.ProductId" class="btn btn-sm btn-success btnUpdate">Cập nhật</a>
                 </td>
@@ -43,7 +45,7 @@
             i++;
         }
         <tr>
-            <th colspan="6" class="text-right">Tổng: </th>
+            <th colspan="8" class="text-right">Tổng: </th>
             <th class="text-center">@Common.FormatNumber(tongtien, 0)</th>
             <th></th>
         </tr>

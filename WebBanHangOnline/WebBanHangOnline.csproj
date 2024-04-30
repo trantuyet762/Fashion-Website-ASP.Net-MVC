@@ -200,11 +200,13 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ColorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductColorController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductSizeController.cs" />
@@ -222,6 +224,7 @@
     <Compile Include="Controllers\NewController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -354,6 +357,34 @@
     <Compile Include="Migrations\202404260906156_updatecart.Designer.cs">
       <DependentUpon>202404260906156_updatecart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202404280528426_addtbColor.cs" />
+    <Compile Include="Migrations\202404280528426_addtbColor.Designer.cs">
+      <DependentUpon>202404280528426_addtbColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404280842458_shoppingcartcolor.cs" />
+    <Compile Include="Migrations\202404280842458_shoppingcartcolor.Designer.cs">
+      <DependentUpon>202404280842458_shoppingcartcolor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404280929528_addOrderDetailSizecolor.cs" />
+    <Compile Include="Migrations\202404280929528_addOrderDetailSizecolor.Designer.cs">
+      <DependentUpon>202404280929528_addOrderDetailSizecolor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404281747089_updateOrderCustomerId.cs" />
+    <Compile Include="Migrations\202404281747089_updateOrderCustomerId.Designer.cs">
+      <DependentUpon>202404281747089_updateOrderCustomerId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404290943208_tbreview.cs" />
+    <Compile Include="Migrations\202404290943208_tbreview.Designer.cs">
+      <DependentUpon>202404290943208_tbreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404290948116_update294.cs" />
+    <Compile Include="Migrations\202404290948116_update294.Designer.cs">
+      <DependentUpon>202404290948116_update294.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202404291613015_updatereview.cs" />
+    <Compile Include="Migrations\202404291613015_updatereview.Designer.cs">
+      <DependentUpon>202404291613015_updatereview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common\Filter.cs" />
@@ -361,6 +392,7 @@
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\EF\Adv.cs" />
     <Compile Include="Models\EF\Category.cs" />
+    <Compile Include="Models\EF\Color.cs" />
     <Compile Include="Models\EF\CommonAbstract.cs" />
     <Compile Include="Models\EF\Contact.cs" />
     <Compile Include="Models\EF\New.cs" />
@@ -369,8 +401,10 @@
     <Compile Include="Models\EF\Post.cs" />
     <Compile Include="Models\EF\Product.cs" />
     <Compile Include="Models\EF\ProductCategory.cs" />
+    <Compile Include="Models\EF\ProductColor.cs" />
     <Compile Include="Models\EF\ProductImage.cs" />
     <Compile Include="Models\EF\ProductSize.cs" />
+    <Compile Include="Models\EF\ReviewProduct.cs" />
     <Compile Include="Models\EF\Size.cs" />
     <Compile Include="Models\EF\Sub.cs" />
     <Compile Include="Models\EF\SystemSetting.cs" />
@@ -473,6 +507,7 @@
     <Content Include="Content\assets\js\custom.js" />
     <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
     <Content Include="Content\assets\js\single_custom.js" />
+    <Content Include="Content\assets\js\single_custom1.js" />
     <Content Include="Content\assets\plugins\easing\easing.js" />
     <Content Include="Content\assets\plugins\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\assets\plugins\font-awesome-4.7.0\css\font-awesome.min.css" />
@@ -638,6 +673,7 @@
     <Content Include="Content\assets\styles\contact_responsive.css" />
     <Content Include="Content\assets\styles\contact_styles.css" />
     <Content Include="Content\assets\styles\detail_style.css" />
+    <Content Include="Content\assets\styles\detail_styles.css" />
     <Content Include="Content\assets\styles\main_style.css" />
     <Content Include="Content\assets\styles\main_styles.css" />
     <Content Include="Content\assets\styles\main_styles1.css" />
@@ -3639,6 +3675,13 @@
     <Content Include="Areas\Admin\Views\Size\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Size\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Size\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Color\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Color\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Color\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductColor\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductColor\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductColor\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3734,6 +3777,9 @@
     <Content Include="Views\New\Detail.cshtml" />
     <Content Include="Views\Post\Index.cshtml" />
     <Content Include="Views\ShoppingCart\VnpayReturn.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Review\_Review.cshtml" />
+    <Content Include="Views\Review\Load_Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3871,6 +3917,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404260906156_updatecart.resx">
       <DependentUpon>202404260906156_updatecart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404280528426_addtbColor.resx">
+      <DependentUpon>202404280528426_addtbColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404280842458_shoppingcartcolor.resx">
+      <DependentUpon>202404280842458_shoppingcartcolor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404280929528_addOrderDetailSizecolor.resx">
+      <DependentUpon>202404280929528_addOrderDetailSizecolor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404281747089_updateOrderCustomerId.resx">
+      <DependentUpon>202404281747089_updateOrderCustomerId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404290943208_tbreview.resx">
+      <DependentUpon>202404290943208_tbreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404290948116_update294.resx">
+      <DependentUpon>202404290948116_update294.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202404291613015_updatereview.resx">
+      <DependentUpon>202404291613015_updatereview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.ChangeModels.resources" />
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.CreatedDatabase.resources" />

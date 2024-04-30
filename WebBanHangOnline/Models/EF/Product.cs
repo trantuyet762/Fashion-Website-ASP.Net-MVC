@@ -13,6 +13,8 @@ namespace WebBanHangOnline.Models.EF
     {
         public Product()
         {
+            this.ReviewProducts = new HashSet<ReviewProduct>();
+            this.ProductColors = new HashSet<ProductColor>();
             this.ProductSizes = new HashSet<ProductSize>();
             this.ProductImage = new HashSet<ProductImage>();
             this.OrderDetails = new HashSet<OrderDetail>();
@@ -52,7 +54,9 @@ namespace WebBanHangOnline.Models.EF
         public virtual ProductCategory ProductCategory { get; set; }
 
         public ICollection<ProductSize> ProductSizes { get; set; }
+        public ICollection<ProductColor> ProductColors { get; set; }
         public virtual ICollection<ProductImage> ProductImage { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<ReviewProduct> ReviewProducts{ get; set; }
     }
 }

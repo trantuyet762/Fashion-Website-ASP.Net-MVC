@@ -12,7 +12,7 @@ using System.Data.Entity;
 using PagedList;
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
-   /* [Authorize(Roles = "Admin")]*/
+   /* [Authorize(Roles = "Admin, Employee")]*/
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -39,6 +39,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
         {
             var items = db.OrderDetails.Where(x => x.OrderId == id).ToList();
             return PartialView(items);
+            
         }
         [HttpPost]
         public ActionResult UpdateTT(int id, int trangthai)

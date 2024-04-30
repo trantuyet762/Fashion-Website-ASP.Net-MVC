@@ -32,31 +32,21 @@
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
-                            </div>
-                        </div>
-                    </div>
+                
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Đăng nhập" class="btn btn-default" />
                         </div>
                     </div>
                     <p style="margin-top: 40px;">
-                        @Html.ActionLink("Bạn chưa có tài khoản", "Register")
+                        @Html.ActionLink("Bạn chưa có tài khoản", "DangKy")
                     </p>
+                    <a href="/account/ForgotPassword" style="color:#000000">Quên mật khẩu</a>
                   
                 }
             </section>
         </div>
-       @* <div class="col-md-4">
-            <section id="socialLoginForm">
-                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-            </section>
-        </div>*@
+      
     </div>
 </div>
 

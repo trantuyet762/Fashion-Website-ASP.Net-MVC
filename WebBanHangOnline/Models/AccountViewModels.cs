@@ -41,7 +41,10 @@ namespace WebBanHangOnline.Models
 
     public class ForgotViewModel
     {
+      
+
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -72,7 +75,7 @@ namespace WebBanHangOnline.Models
         [Display(Name = "Số điện thoại")]
         public string Phone { get; set; }
         [Display(Name = "Quyền")]
-        public string Role { get; set; }
+        public List<string> Role { get; set; }
 
 
         
@@ -94,7 +97,22 @@ namespace WebBanHangOnline.Models
         [Compare("Password", ErrorMessage = "Mật khẩu nhập lại chưa đúng.")]
         public string ConfirmPassword { get; set; }
     }
-  
+    public class EditAccountViewModel
+    {
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string FullName { get; set; }
+
+        public string Phone { get; set; }
+        public List<string> Roles { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+    }
 
     public class ResetPasswordViewModel
     {
@@ -119,6 +137,10 @@ namespace WebBanHangOnline.Models
 
     public class ForgotPasswordViewModel
     {
+        [Required]
+        [Display(Name = "Tên tài khoản")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

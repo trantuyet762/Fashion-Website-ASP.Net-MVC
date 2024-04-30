@@ -5,7 +5,7 @@
     @if (Model != null && Model.Any())
     {
 <h4 style="padding-right:30px">GIỎ HÀNG: <span style="float:right;"><small>@Model.Count()</small></span></h4>
-        var i = 0;
+       
         var tongtien = decimal.Zero;
         <div style="border:1px solid #808080">
 <table class="table">
@@ -14,13 +14,15 @@
     tongtien += item.TotalPrice;
         <tr>
             <td>@item.ProductName</td>
+            <td>@item.SizeName</td>
+            <td>@item.ColorName</td>
             <td>@item.Quantity</td>
             <td>@Common.FormatNumber(item.Price,0)</td>
         </tr>
 
     }
     <tr>
-        <th colspan="2">Tổng tiền</th>
+        <th colspan="4">Tổng tiền</th>
         <th>@Common.FormatNumber(tongtien, 0)</th>
     </tr>
 </table>

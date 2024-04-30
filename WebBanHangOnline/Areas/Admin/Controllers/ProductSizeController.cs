@@ -1,8 +1,13 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
+using System.Data.Entity;
 using System.Web.Mvc;
+using System.IO;
+using System.Net;
 using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
 namespace WebBanHangOnline.Areas.Admin.Controllers
@@ -11,9 +16,18 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin/ProductSize
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var items = db.ProductSizes;
+            IEnumerable<ProductSize> items = db.ProductSizes.OrderByDescending(x => x.id).ToList();
+            var pageSize = 10;
+            if (page == null)
+            {
+                page = 1;
+            }
+            var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            items = items.ToPagedList(pageIndex, pageSize);
+            ViewBag.PageSize = pageSize;
+            ViewBag.Page = page;
             return View(items);
         }
         public ActionResult Add()
@@ -38,7 +52,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
 
             }
             ViewBag.Product = new SelectList(db.Products.ToList(), "id", "Title");
-            ViewBag.Size = new SelectList(db.Sizes.ToList(), "id", "TenSize");
+            ViewBag.Size = new SelectList(db.Sizes.ToList(), "id", "SizeName");
 
             return View(model);
         }
@@ -80,5 +94,23 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
 
 
     }
-}
+        public ActionResult DeleteAll(string ids)
+        {
+            if (!string.IsNullOrEmpty(ids))
+            {
+                var items = ids.Split(',');
+                if (items != null && items.Any())
+                {
+                    foreach (var item in items)
+                    {
+                        var obj = db.ProductSizes.Find(Convert.ToInt32(item));
+                        db.ProductSizes.Remove(obj);
+                        db.SaveChanges();
+                    }
+                }
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
+    }
 }

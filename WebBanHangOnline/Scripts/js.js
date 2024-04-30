@@ -7,11 +7,12 @@
         var id = $(this).data('id');
         var quantity = parseInt($('#quantity_value').text()); // Lấy số lượng từ số trên giao diện
         var size = $('#size').val(); // Lấy kích thước từ dropdown list
+        var color = $('#color').val(); // Lấy kích thước từ dropdown list
 
         $.ajax({
             url: '/shoppingcart/AddToCart',
             type: 'POST',
-            data: { id: id, quantity: quantity, size: size }, // Truyền id, số lượng và kích thước
+            data: { id: id, quantity: quantity, size: size, color: color }, // Truyền id, số lượng, kích thước, màu
             success: function (rs) {
                 if (rs.Success) {
                     $('#checkout_items').html(rs.Count);
@@ -40,15 +41,16 @@
         var $row = $(this).closest('tr'); // Tìm dòng chứa nút cập nhật
         var id = $row.data("product-id");
         var sizeId = $row.data("size-id");
+        var colorId = $row.data("color-id");
         var quantity = $row.find('.quantity-input').val(); // Tìm input số lượng trong dòng
-        Update(id, quantity, sizeId);
+        Update(id, quantity, sizeId, colorId);
     });
 
-    function Update(id, quantity, sizeId) {
+    function Update(id, quantity, sizeId, colorId) {
         $.ajax({
             url: '/shoppingcart/Update',
             type: 'POST',
-            data: { id: id, quantity: quantity, sizeId: sizeId },
+            data: { id: id, quantity: quantity, sizeId: sizeId, colorId: colorId },
             success: function (rs) {
                 if (rs.Success) {
                     LoadCart();
@@ -63,12 +65,14 @@
     $('body').on('click', '.btnDelete', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
+        var sizeId = $(this).closest('tr').data('size-id');
+        var colorId = $(this).closest('tr').data('color-id');
         var conf = confirm('Bạn muốn xóa sản phẩm này?');
         if (conf == true) {
             $.ajax({
                 url: '/shoppingcart/Delete',
                 type: 'POST',
-                data: { id: id },
+                data: { id: id, sizeId: sizeId, colorId: colorId },
                 success: function (rs) {
                     if (rs.Success) {
                         $('#checkout_items').html(rs.Count);
@@ -79,6 +83,7 @@
             });
         }
     });
+
 });
 
 // Hiển thị số lượng sản phẩm trong giỏ hàng

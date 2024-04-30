@@ -12,7 +12,7 @@ using WebBanHangOnline.Models;
 
 namespace WebBanHangOnline.Controllers
 {
-   /* [Authorize]*/
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -53,7 +53,7 @@ namespace WebBanHangOnline.Controllers
         }
 
         //
-        // GET: /Account/Login
+        // GET: /Account/Đăng nhập
         [AllowAnonymous]
         public ActionResult DangNhap(string returnUrl)
         {
@@ -62,7 +62,7 @@ namespace WebBanHangOnline.Controllers
         }
 
         //
-        // POST: /Account/Login
+        // POST: /Account/Đăng nhập
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -86,11 +86,35 @@ namespace WebBanHangOnline.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Lỗi đăng nhập!");
                     return View(model);
             }
         }
-
+        public async Task<ActionResult> Profile()
+        {
+            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+            var item = new CreateAccountViewModel();
+            item.Email = user.Email;
+            item.FullName = user.FullName;
+            item.Phone = user.Phone;
+            item.UserName = user.UserName;
+            return View(user);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditProfile(CreateAccountViewModel req)
+        {
+            var user = await UserManager.FindByNameAsync(req.UserName);
+            user.Email = req.Email;
+            user.FullName = req.FullName;
+            user.Phone = req.Phone;
+            var rs =await UserManager.UpdateAsync(user);
+            if (rs.Succeeded)
+            {
+                return RedirectToAction("Profile");
+            }
+            return View(req);
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -135,7 +159,7 @@ namespace WebBanHangOnline.Controllers
         }
 
         //
-        // GET: /Account/Register
+        // GET: /Account/Đăng ký
         [AllowAnonymous]
         public ActionResult DangKy()
         {
@@ -161,15 +185,15 @@ namespace WebBanHangOnline.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                   /* UserManager.AddToRole(user.Id, model.Role);*/
-                    /* await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);*/
+                   
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    UserManager.AddToRole(user.Id, "Customer");
 
-                  
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-            ViewBag.Role = new SelectList(db.Roles.ToList(), "Name", "Name");
+           
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -204,18 +228,19 @@ namespace WebBanHangOnline.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+
+                if (user == null || user.Email != model.Email)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                // Gửi email với liên kết đặt lại mật khẩu
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                WebBanHangOnline.Common.Common.SendMail("TTShop", "Quên mật khẩu", "Bạn click vào <a href='" + callbackUrl + "'>link này</a> để reset mật khẩu", model.Email);
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -263,8 +288,8 @@ namespace WebBanHangOnline.Controllers
             AddErrors(result);
             return View();
         }
-
-        //
+        // POST: /Account/SendConfirmationEmail
+       
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
@@ -326,7 +351,7 @@ namespace WebBanHangOnline.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("DangNhap","Account");
             }
 
             // Sign in the user with this external login provider if the user already has a login

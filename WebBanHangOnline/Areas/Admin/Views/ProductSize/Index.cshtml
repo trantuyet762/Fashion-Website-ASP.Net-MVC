@@ -1,5 +1,6 @@
-﻿@model IEnumerable<WebBanHangOnline.Models.EF.ProductSize>
-
+﻿@model PagedList.PagedList<WebBanHangOnline.Models.EF.ProductSize>
+@using PagedList.Mvc;
+@using PagedList;
 @{
     ViewBag.Title = "Sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -48,7 +49,7 @@
             <div class="card-tools">
                 <a href="/admin/productsize/add" class="btn btn-primary">Thêm mới</a>
                 <a href="#" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
-               
+
             </div>
         </div>
         <div class="card-body">
@@ -68,7 +69,7 @@
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
-                        var i = 1;
+                        var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
 
                         foreach (var item in Model)
                         {
@@ -102,7 +103,7 @@
                     }
                 </tbody>
             </table>
-            @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+             @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -116,7 +117,59 @@
 @section scripts{
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
+        $('body').on('click', '#BtnDeleteAll', function (e) {
+            e.preventDefault();
+            var str = "";
 
+            var checkbox = $(this).parents('.card').find('tr td input:checkbox');
+            var i = 0;
+            checkbox.each(function () {
+
+                if (this.checked) {
+                    checkbox.attr('selected', 'checked');
+                    var _id = $(this).val();
+                    if (i === 0) {
+                        str += _id;
+                    } else {
+                        str += "," + _id;
+                    }
+                    i++;
+
+                } else {
+                    checkbox.attr('selected', '');
+                }
+
+            });
+            if (str.length > 0) {
+                var conf = confirm('Bạn có muốn xóa các bản ghi này không?');
+                if (conf === true) {
+                    $.ajax({
+                        url: '/admin/productsize/deleteAll',
+                        type: 'POST',
+                        data: { ids: str },
+                        success: function (rs) {
+                            if (rs.success) {
+                                location.reload();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $('body').on('change', "#SelectAll", function () {
+            var checkStatus = this.checked;
+            var checkbox = $(this).parents('.card-body').find('tr td input:checkbox');
+            checkbox.each(function () {
+                this.checked = checkStatus;
+                if (this.checked) {
+                    checkbox.attr('selected', 'checked');
+                } else {
+                    checkbox.attr('selected', '');
+                }
+
+            })
+        });
 
         $('body').on('click', '.btnDelete', function () {
             var id = $(this).data("id");

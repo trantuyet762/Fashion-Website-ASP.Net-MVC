@@ -1595,3 +1595,13 @@ section {
         .footer_social ul li a:hover {
             color: #fe4c50;
         }
+
+.product-detail-size, .product-detail-color {
+    height: 40px;
+}
+
+#size, #color {
+    margin-left: 29px;
+    width: 132px;
+    height: 40px;
+}

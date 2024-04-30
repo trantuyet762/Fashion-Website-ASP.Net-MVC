@@ -155,3 +155,10 @@ E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\bin\Microsoft.Owin.Security.Faceboo
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.update2642.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatecarrt.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatecart.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addtbColor.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.shoppingcartcolor.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.addOrderDetailSizecolor.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateOrderCustomerId.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.tbreview.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.update294.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatereview.resources

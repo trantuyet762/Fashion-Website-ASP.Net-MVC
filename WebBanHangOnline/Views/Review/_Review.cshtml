@@ -1,0 +1,67 @@
+﻿
+@model WebBanHangOnline.Models.EF.ReviewProduct
+
+<div class="add_review">
+    @if (ViewBag.ErrorMessage == null)
+    {
+        using (Ajax.BeginForm("PostReview", "Review", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "load_review",
+            OnSuccess = "OnSuccessRE",
+            OnFailure = "OnFailureRE",
+            OnBegin = "OnBeginRE"
+        }, new { @id = "myForm" }))
+        {
+<script>
+    function OnBeginRE() {
+        $('#review_submit').attr("disabled", "disabled");
+        $('#load_send').html('<h2>...</h2>');
+    }
+
+    function OnSuccessRE(res) {
+        if (res.Success) {
+            $("#review_form")[0].reset();
+            location.reload(); // Load lại trang sau khi thành công
+        } else {
+            $('#load_send').html('<p style="color:red">' + res.Message + '</p>');
+        }
+    }
+
+    function OnFailureRE(res) {
+        $('#load_send').html('<p style="color:red">Có lỗi xảy ra khi gửi đánh giá.</p>');
+    }
+</script>
+                    @Html.AntiForgeryToken();
+<div>
+    <h1>Đánh giá của bạn:</h1>
+    @Html.HiddenFor(x => x.FullName)
+    @Html.HiddenFor(x => x.ProductId, new { @value = ViewBag.ProductId })
+    <input type="text" id="txtRate" name="Rate" value="4" style="visibility:hidden;" />
+</div>
+                    <div>
+                        <ul class="user_star_rating">
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                        </ul>
+                        @Html.TextAreaFor(x => x.Content, new { @class = "input_review", @rows = "4", @placeholder = "Nhập đánh giá của bạn" })
+                    </div>
+                                        <div class="text-left text-sm-right">
+                                            <p id="load_send"></p>
+                                            <button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">Gửi</button>
+                                        </div> }
+                                }
+                                else
+                                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewBag.ErrorMessage
+                    </div>}
+</div>
+
+@section scripts{
+    <script src="~/Content/assets/js/single_custom.js"></script>
+
+}
