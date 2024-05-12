@@ -13,9 +13,21 @@ namespace WebBanHangOnline.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Products
         [AllowAnonymous]
-        public ActionResult Index()
+       /* public ActionResult Index()
         {
             var items = db.Products.ToList();
+            return View(items);
+        }*/
+       public ActionResult Index(string searchtext)
+        {
+            IEnumerable<Product> items = db.Products.OrderByDescending(x => x.id);
+
+
+            if (!string.IsNullOrEmpty(searchtext))
+            {
+                var Searchtext = searchtext.ToLower();
+                items = items.Where(x => x.Title.ToLower().Contains(Searchtext) || x.Alias.ToLower().Contains(Searchtext));
+            }
             return View(items);
         }
         [AllowAnonymous]

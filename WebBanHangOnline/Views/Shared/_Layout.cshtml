@@ -37,10 +37,22 @@
             <div class="top_nav">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="top_nav_left">Hotline: 0862512098 </div>
                         </div>
-                        <div class="col-md-6 top_nav_right ">
+                        <div class="col-md-4">
+                            @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { }))
+                            {
+                        <div class="input-group input-group-sm"  style="height:32px; margin-top: 7px; border:0px;">
+                            @Html.TextBox("searchtext", null, new { @class = "form-control" })
+                            @*<input type="text" class="form-control" />*@
+                            
+                                <button type="submit" class="btn btn-light btn-flat" style="border: 0px; border-top-left-radius: 0; border-bottom-left-radius: 0; padding: 0 20px;"><i class="fa fa-search" aria-hidden="true"></i></button>
+                          
+                        </div>
+                        }
+                        </div>
+                        <div class="col-md-4 top_nav_right ">
 
                             <!-- Currency / Language / My Account -->
 
@@ -88,8 +100,7 @@
                             <nav class="navbar">
                                 @Html.Action("MenuTop", "Menu")
                                 <ul class="navbar_user">
-                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                                   
                                     <li class="checkout">
                                         <a href="/gio-hang">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -152,6 +163,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
         </footer>
 

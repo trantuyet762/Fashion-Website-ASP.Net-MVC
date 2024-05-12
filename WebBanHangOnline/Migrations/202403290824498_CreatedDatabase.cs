@@ -156,7 +156,7 @@ namespace WebBanHangOnline.Migrations
                         Image = c.String(),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         PriceSale = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Quantity = c.Int(nullable: false),
+                      
                         IsHome = c.Boolean(nullable: false),
                         IsSale = c.Boolean(nullable: false),
                         IsFeature = c.Boolean(nullable: false),
@@ -171,10 +171,11 @@ namespace WebBanHangOnline.Migrations
                         Modifieddate = c.DateTime(nullable: false),
                         ModifiedBy = c.String(),
                     })
+
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.tb_ProductCategory", t => t.ProductCategoryID, cascadeDelete: true)
                 .Index(t => t.ProductCategoryID);
-            
+          
             CreateTable(
                 "dbo.tb_ProductCategory",
                 c => new
@@ -282,7 +283,7 @@ namespace WebBanHangOnline.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
+
         }
         
         public override void Down()

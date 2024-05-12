@@ -46,6 +46,8 @@ namespace WebBanHangOnline.Models
         public DbSet<Color> Colors { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
         public DbSet<ReviewProduct> ReviewProducts { get; set; }
+        public DbSet<ProductQuantity> ProductQuantities { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

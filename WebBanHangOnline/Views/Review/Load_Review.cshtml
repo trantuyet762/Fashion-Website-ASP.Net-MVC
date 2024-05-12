@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WebBanHangOnline.Models.EF.ReviewProduct>
 <div class="tab_title reviews_title">
-    <h4>Reviews (@ViewBag.Count)</h4>
+    <h4>Đánh giá (@ViewBag.Count)</h4>
 </div>
 
 <!-- User Review -->
@@ -19,7 +19,7 @@
             </div>
             <div class="review">
                 <div class="review_date">@item.CreatedDate.ToString("dd MM yyyy")</div>
-                <div class="user_name">@item.UserName</div>
+                <div class="user_name">@item.FullName</div>
                 <p>@item.Content</p>
             </div>
         </div>

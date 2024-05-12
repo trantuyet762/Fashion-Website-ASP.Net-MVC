@@ -13,6 +13,7 @@ namespace WebBanHangOnline.Models.EF
         public Color()
         {
             this.ProductColors = new HashSet<ProductColor>();
+            this.ProductQuantities = new HashSet<ProductQuantity>();
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -20,5 +21,6 @@ namespace WebBanHangOnline.Models.EF
         public string Title { get; set; }
         public string ColorName { get; set; }
         public ICollection<ProductColor> ProductColors { get; set; }
+        public ICollection<ProductQuantity> ProductQuantities { get; set; }
     }
 }

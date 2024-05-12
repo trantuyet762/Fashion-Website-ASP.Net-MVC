@@ -208,10 +208,10 @@
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductColorController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImagesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductQuantityController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductSizeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
     <Compile Include="Areas\Admin\Controllers\SizeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThongKeDoanhThuController.cs" />
     <Compile Include="Common\Common.cs" />
@@ -385,6 +385,22 @@
     <Compile Include="Migrations\202404291613015_updatereview.Designer.cs">
       <DependentUpon>202404291613015_updatereview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202405070316107_updatePQ.cs" />
+    <Compile Include="Migrations\202405070316107_updatePQ.Designer.cs">
+      <DependentUpon>202405070316107_updatePQ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405070514270_update751.cs" />
+    <Compile Include="Migrations\202405070514270_update751.Designer.cs">
+      <DependentUpon>202405070514270_update751.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405070534048_updateQuantity.cs" />
+    <Compile Include="Migrations\202405070534048_updateQuantity.Designer.cs">
+      <DependentUpon>202405070534048_updateQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202405101249195_ud105.cs" />
+    <Compile Include="Migrations\202405101249195_ud105.Designer.cs">
+      <DependentUpon>202405101249195_ud105.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common\Filter.cs" />
@@ -403,6 +419,7 @@
     <Compile Include="Models\EF\ProductCategory.cs" />
     <Compile Include="Models\EF\ProductColor.cs" />
     <Compile Include="Models\EF\ProductImage.cs" />
+    <Compile Include="Models\EF\ProductQuantity.cs" />
     <Compile Include="Models\EF\ProductSize.cs" />
     <Compile Include="Models\EF\ReviewProduct.cs" />
     <Compile Include="Models\EF\Size.cs" />
@@ -3682,6 +3699,9 @@
     <Content Include="Areas\Admin\Views\ProductColor\Add.cshtml" />
     <Content Include="Areas\Admin\Views\ProductColor\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductQuantity\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductQuantity\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductQuantity\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3787,6 +3807,7 @@
     <Folder Include="Content\ckfinder\userfiles\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Uploads\flash\" />
+    <Folder Include="Views\Search\" />
     <Folder Include="Views\ThongKe\" />
   </ItemGroup>
   <ItemGroup>
@@ -3938,6 +3959,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202404291613015_updatereview.resx">
       <DependentUpon>202404291613015_updatereview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405070316107_updatePQ.resx">
+      <DependentUpon>202405070316107_updatePQ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405070514270_update751.resx">
+      <DependentUpon>202405070514270_update751.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405070534048_updateQuantity.resx">
+      <DependentUpon>202405070534048_updateQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202405101249195_ud105.resx">
+      <DependentUpon>202405101249195_ud105.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.ChangeModels.resources" />
     <EmbeddedResource Include="obj\Debug\WebBanHangOnline.Migrations.CreatedDatabase.resources" />

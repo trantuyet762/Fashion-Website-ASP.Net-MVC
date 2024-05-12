@@ -162,3 +162,7 @@ E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migratio
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.tbreview.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.update294.resources
 E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatereview.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updatePQ.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.update751.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.updateQuantity.resources
+E:\Ky7\ASP\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.ud105.resources

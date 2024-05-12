@@ -9,12 +9,12 @@ using WebBanHangOnline.Models.EF;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
-   /* [Authorize(Roles = "Admin,Employee")]*/
+    [Authorize(Roles = "Admin,Employee")]
     public class NewController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Admin/New
-        public ActionResult Index(string Searchtext, int? page)
+        public ActionResult Index(string searchtext, int? page)
         {
             var pageSize = 5;
             if(page == null)
@@ -23,9 +23,10 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             }
             IEnumerable<New> items = db.New.OrderByDescending(x => x.id);
            
-            if (!string.IsNullOrEmpty(Searchtext))
+            if (!string.IsNullOrEmpty(searchtext))
             {
-               items=  items.Where(x => x.Alias.Contains(Searchtext) || x.Title.Contains(Searchtext));
+                var Searchtext = searchtext.ToLower();
+               items=  items.Where(x => x.Alias.ToLower().Contains(Searchtext) || x.Title.ToLower().Contains(Searchtext));
             }
             var pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
              items = items.ToPagedList(pageIndex,pageSize);

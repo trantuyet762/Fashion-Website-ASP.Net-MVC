@@ -8,7 +8,7 @@ using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
-   /* [Authorize(Roles = "Admin,Employee")]*/
+    [Authorize(Roles = "Admin,Employee")]
     public class ProductColorController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

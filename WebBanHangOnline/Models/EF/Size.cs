@@ -13,6 +13,7 @@ namespace WebBanHangOnline.Models.EF
         public Size()
         {
             this.ProductSizes = new HashSet<ProductSize>();
+            this.ProductQuantities = new HashSet<ProductQuantity>();
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -20,5 +21,6 @@ namespace WebBanHangOnline.Models.EF
         public string Title { get; set; }
         public string SizeName { get; set; }
         public ICollection<ProductSize> ProductSizes { get; set; }
+        public ICollection<ProductQuantity> ProductQuantities{ get; set; }
     }
 }

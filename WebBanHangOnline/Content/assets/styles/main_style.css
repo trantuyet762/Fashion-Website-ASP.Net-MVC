@@ -61,6 +61,26 @@ body {
     color: #1e1e27;
 }
 
+/* Định nghĩa keyframes animation */
+@keyframes slideAnimation {
+    0% {
+        transform: translateX(0);
+    }
+
+    33.333% {
+        transform: translateX(-100%);
+    }
+
+    66.666% {
+        transform: translateX(-200%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
 div {
     display: block;
     position: relative;

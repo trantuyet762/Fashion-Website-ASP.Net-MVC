@@ -31,7 +31,11 @@ namespace WebBanHangOnline.Models.EF
         public int Quantity { get; set; }
         public int TypePayment { get; set; }
         public int Status { get; set; }
+        [Required(ErrorMessage = "CustomerId không được để trống!")]
+        [StringLength(128)]
         public string CustomerId { get; set; }
+        [ForeignKey("CustomerId")]
+        public ApplicationUser User { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

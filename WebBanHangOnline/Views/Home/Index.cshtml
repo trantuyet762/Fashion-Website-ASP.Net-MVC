@@ -1,7 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<link type="text/css" href="~/Content/assets/styles/main_style.css" rel="stylesheet" />
+
+<link href="~/Content/assets/styles/main_style.css" rel="stylesheet" />
 <div class="main_slider" style="background-image:url(/Content/assets/images/slider_3.jpg)">
     <div class="container fill_height">
         <div class="row align-items-center fill_height">
@@ -14,6 +15,7 @@
             </div>
         </div>
     </div>
+   
 </div>
 @Html.Action("MenuProductCategory","Menu")
 
