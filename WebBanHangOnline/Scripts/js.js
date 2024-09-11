@@ -6,22 +6,24 @@
         e.preventDefault();
         var id = $(this).data('id');
         var quantity = parseInt($('#quantity_value').text()); // Lấy số lượng từ số trên giao diện
+
         var size = $('#size').val(); // Lấy kích thước từ dropdown list
         var color = $('#color').val(); // Lấy kích thước từ dropdown list
-
-        $.ajax({
-            url: '/shoppingcart/AddToCart',
-            type: 'POST',
-            data: { id: id, quantity: quantity, size: size, color: color }, // Truyền id, số lượng, kích thước, màu
-            success: function (rs) {
-                if (rs.Success) {
-                    $('#checkout_items').html(rs.Count);
-                    alert(rs.msg);
-                    LoadCart(); // Load lại giỏ hàng sau khi thêm sản phẩm
+        
+            $.ajax({
+                url: '/shoppingcart/AddToCart',
+                type: 'POST',
+                data: { id: id, quantity: quantity, size: size, color: color }, // Truyền id, số lượng, kích thước, màu
+                success: function (rs) {
+                    if (rs.Success) {
+                        $('#checkout_items').html(rs.Count);
+                        alert(rs.msg);
+                        LoadCart(); // Load lại giỏ hàng sau khi thêm sản phẩm
+                    }
                 }
-            }
+            });
+       
         });
-    });
 
     // Xóa tất cả sản phẩm trong giỏ hàng
     $('body').on('click', '.btnDeleteAll', function (e) {

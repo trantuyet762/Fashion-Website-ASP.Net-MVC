@@ -7,7 +7,7 @@
 <link type="text/css" href="~/Content/assets/styles/single_responsive1.css" rel="stylesheet" />
 @if (Model != null)
 {
-    <div class="container single_product_container">
+    <div class="container single_product_container" id="productId" data-id="@Model.id">
         <div class="row">
             <div class="col">
 
@@ -92,9 +92,9 @@
                         <label for="size">Chọn Size:</label>
                         <select id="size" name="size">
                             <option value="">-- Chọn size --</option>
-                            @foreach (var productSize in Model.ProductSizes)
+                            @foreach (var productSize in Model.ProductQuantities)
                             {
-                                <option id="size_@productSize.SizeID" value="@productSize.SizeID">@productSize.Size.SizeName</option>
+                                <option id="size_@productSize.SizeId" value="@productSize.SizeId" data-id="@productSize.SizeId" data-name="@productSize.Size.SizeName" >@productSize.Size.SizeName</option>
                             }
                         </select>
                     </div>
@@ -104,19 +104,20 @@
                         <label for="color">Chọn màu:</label>
                         <select id="color" name="color">
                             <option value="">-- Chọn màu --</option>
-                            @foreach (var productColor in Model.ProductColors)
+                            @foreach (var productColor in Model.ProductQuantities)
                             {
-                                <option id="color_@productColor.ColorID" value="@productColor.ColorID"> @productColor.Color.ColorName</option>
+                                <option  id="color_@productColor.ColorId" value="@productColor.ColorId" data-id="@productColor.ColorId" data-name="@productColor.Color.ColorName" > @productColor.Color.ColorName</option>
                             }
                         </select>
                     </div>
                     <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                         <span id="quantity-span">Quantity:</span>
                         <div class="quantity_selector">
-                            <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                            <span id="productQuantity" data-quantity="@Model.ProductQuantities.FirstOrDefault().QuantityProduct" class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
                             <span id="quantity_value">1</span>
                             <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
                         </div>
+
                         <div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@Model.id">Thêm vào giỏ hàng</a></div>
                         <div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
                     </div>
@@ -153,7 +154,7 @@
 
                         <div id="tab_3" class="tab_container">
                             <div class="row">
-                              
+
                                 <!-- Add Review -->
                                 <div class="col-md-12 reviews_col">
 
@@ -184,6 +185,7 @@
 }
 
 @section scripts{
-    <script src="~/Content/assets/js/single_custom.js"></script>
-  
+
+    <script src="~/Content/assets/js/single_custom1.js"></script>
+
 }

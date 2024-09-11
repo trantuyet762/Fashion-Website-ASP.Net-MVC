@@ -50,7 +50,7 @@
                         var i = ((ViewBag.Page-1)*ViewBag.PageSize)+1;
                         foreach (var item in Model)
                         {
-                            <tr>
+                            <tr id="trow_@item.id">
                                 <td>@i</td>
                                 <td>@item.Code</td>
                                 <td>@item.CustomerName</td>
@@ -82,6 +82,7 @@
                                 <td>
                                     <a href="/admin/order/view/@item.id" class="btn btn-sm btn-success">Xem</a>
                                     <a href="#" class="btn btn-sm btn-danger btnCapNhat" data-id="@item.id">Cập nhật</a>
+                                    <a href="#" data-id="@item.id" class="btn btn-sm btn-danger btnDelete">Hủy</a>
                                 </td>
                             </tr>
                             i++;
@@ -117,6 +118,7 @@
                   <select class="form-control" id="ddTrangThai">
                       <option value="1">Chưa thanh toán</option>
                       <option value="2">Đã thanh toán</option>
+                      <option value="3">Hoàn thành</option>
                   </select>
               </div>
             </div>
@@ -150,6 +152,22 @@
                         }
                     }
                 })
+            });
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Xác nhận hủy đơn hàng này?');
+                if (conf == true) {
+                    $.ajax({
+                        url: '/admin/order/delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
             });
         });
     </script>

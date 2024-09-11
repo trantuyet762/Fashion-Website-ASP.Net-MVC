@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebBanHangOnline.Models.EF.Product>
+
 @{
     ViewBag.Title = "Danh sách sản phẩm";
 }
@@ -40,8 +41,8 @@
                     </p>
                     <div id="slider-range"></div>
                     <div class="filter_button"><span>Áp dụng</span></div>
-                    <hr/>
-                    @Html.Action("Refresh","Home")
+                    <hr />
+                    @Html.Action("Refresh", "Home")
                 </div>
 
 
@@ -65,12 +66,12 @@
                                         <span class="type_sorting_text">Sắp xếp theo</span>
                                         <i class="fa fa-angle-down"></i>
                                         <ul class="sorting_type">
-                                          
+
                                             <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Giá</span></li>
                                             <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Tên sản phẩm</span></li>
                                         </ul>
                                     </li>
-                                
+
                                 </ul>
                                 <div class="pages d-flex flex-row align-items-center">
                                     <div class="page_current">
@@ -94,6 +95,7 @@
                                 <!-- Product 1 -->
                                 @if (Model != null && Model.Any())
                                 {
+                                    var i = ((ViewBag.Page - 1) * ViewBag.PageSize) + 1;
                                     foreach (var item in Model)
                                     {
                                         var strImage = "";
@@ -108,11 +110,11 @@
                                                     <img src="@strImage" alt="@item.Title">
                                                 </div>
                                                 <div class="favorite favorite_left"></div>
-                                                @if (item.PriceSale > 0)
-                                                {
-                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
-                                                }
-
+                                                @*@if (item.PriceSale > 0)
+                                        {
+                                            <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
+                                        }
+                                                *@
                                                 <div class="product_info">
                                                     <h6 class="product_name"><a href="/chi-tiet/@item.Alias-p@(item.id)">@item.Title</a></h6>
                                                     @if (item.PriceSale > 0)
@@ -127,7 +129,7 @@
                                                     }
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
 
                                     }
@@ -140,6 +142,7 @@
                         </div>
                     </div>
                 </div>
+               
             </div>
         </div>
     </div>

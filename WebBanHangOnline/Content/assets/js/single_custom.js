@@ -181,7 +181,12 @@ jQuery(document).ready(function ($) {
 
 			plus.on('click', function () {
 				var x = parseInt(value.text());
-				value.text(x + 1);
+				var productQuantity = parseInt($('#productQuantity').data('quantity'));
+				if (x < productQuantity) {
+					value.text(x + 1);
+				} else {
+					alert("Số lượng vượt quá số lượng trong kho");
+				}
 			});
 
 			minus.on('click', function () {

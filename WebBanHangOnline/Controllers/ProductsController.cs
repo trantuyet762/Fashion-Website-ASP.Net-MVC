@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,10 +19,10 @@ namespace WebBanHangOnline.Controllers
             var items = db.Products.ToList();
             return View(items);
         }*/
-       public ActionResult Index(string searchtext)
+       public ActionResult Index(string searchtext, int? page)
         {
-            IEnumerable<Product> items = db.Products.OrderByDescending(x => x.id);
-
+            IEnumerable<Product> items = db.Products.Where(x=> x.IsActive).OrderByDescending(x => x.id);
+            
 
             if (!string.IsNullOrEmpty(searchtext))
             {
@@ -43,15 +44,15 @@ namespace WebBanHangOnline.Controllers
                 db.SaveChanges();
             }
 
-            ViewBag.ProductSize = new SelectList(db.ProductSizes.ToList(), "ProductID", "SizeName");
-            ViewBag.ProductColor = new SelectList(db.ProductColors.ToList(), "ProductID", "ColorName");
+            ViewBag.ProductSize = new SelectList(db.ProductColors.ToList(), "ProductID", "SizeName");
+            ViewBag.ProductColor = new SelectList(db.ProductSizes.ToList(), "ProductID", "ColorName");
             return View(item);
         }
         [AllowAnonymous]
         public ActionResult ProductCategory(string alias,int id)
         {
 
-            var items = db.Products.ToList();
+            var items = db.Products.Where(x=> x.IsActive).ToList();
             if (id >0 )
             {
                 items = items.Where(x => x.ProductCategoryID == id).ToList();
@@ -76,6 +77,18 @@ namespace WebBanHangOnline.Controllers
             var items = db.Products.Where(x => x.IsSale && x.IsActive).Take(12).ToList();
             return PartialView(items);
         }
-       
+        [AllowAnonymous]
+        public ActionResult GetQuantity(int productId, int sizeId, int colorId)
+        {
+            var productQuantity = db.ProductQuantities.FirstOrDefault(pq => pq.ProductId == productId && pq.SizeId == sizeId && pq.ColorId == colorId);
+
+            if (productQuantity != null)
+            {
+                return Json(productQuantity.QuantityProduct, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(0, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

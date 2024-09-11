@@ -50,6 +50,7 @@ jQuery(document).ready(function ($) {
 	initStarRating();
 	initFavorite();
 	initTabs();
+	initSizesAndColors();
 
 	/* 
 
@@ -173,6 +174,37 @@ jQuery(document).ready(function ($) {
 
 	*/
 
+
+	function initSizesAndColors() {
+		var uniqueSizes = [];
+		var uniqueColors = [];
+
+		$('#size option').each(function () {
+			var sizeId = $(this).val();
+			var sizeName = $(this).text(); // Lấy tên size thay vì id
+			if (sizeId !== '' && !uniqueSizes.some(size => size.id === sizeId)) {
+				uniqueSizes.push({ id: sizeId, name: sizeName }); // Lưu id và tên vào mảng uniqueSizes nếu chưa tồn tại
+			}
+		});
+
+		$('#color option').each(function () {
+			var colorId = $(this).val();
+			var colorName = $(this).text(); // Lấy tên màu thay vì id
+			if (colorId !== '' && !uniqueColors.some(color => color.id === colorId)) {
+				uniqueColors.push({ id: colorId, name: colorName }); // Lưu id và tên vào mảng uniqueColors nếu chưa tồn tại
+			}
+		});
+
+		$('#size').empty().append($('<option>', { value: '', text: '-- Chọn size --' }));
+		uniqueSizes.forEach(function (size) {
+			$('#size').append($('<option>', { value: size.id, text: size.name }));
+		});
+
+		$('#color').empty().append($('<option>', { value: '', text: '-- Chọn màu --' }));
+		uniqueColors.forEach(function (color) {
+			$('#color').append($('<option>', { value: color.id, text: color.name  }));
+		});
+	}
 	function initQuantity() {
 		if ($('.plus').length && $('.minus').length) {
 			var plus = $('.plus');
@@ -181,18 +213,42 @@ jQuery(document).ready(function ($) {
 
 			plus.on('click', function () {
 				var x = parseInt(value.text());
-				value.text(x + 1);
-			});
+				var productId = $('#productId').data('id');
+				var sizeId = $('#size').val(); // Lấy giá trị của size
+				var colorId = $('#color').val();
 
+				// Kiểm tra xem size và màu đã được chọn chưa
+				if (sizeId && colorId) {
+					$.ajax({
+						url: '/Products/GetQuantity',
+						type: 'GET',
+						data: { productId: productId, sizeId: sizeId, colorId: colorId },
+						success: function (result) {
+							var quantityProduct = parseInt(result);
+							if (x < quantityProduct) {
+								value.text(x + 1);
+								
+							} else {
+								alert("Số lượng vượt quá số lượng trong kho");
+							}
+						}
+					});
+				} else {
+					alert("Vui lòng chọn size và màu trước khi thêm vào giỏ hàng");
+				}
+				
+			});
+			
 			minus.on('click', function () {
 				var x = parseInt(value.text());
 				if (x > 1) {
 					value.text(x - 1);
 				}
 			});
+
 		}
 	}
-
+	
 	/* 
 
 	6. Init Star Rating
@@ -205,7 +261,7 @@ jQuery(document).ready(function ($) {
 			var dem = 0;
 			stars.each(function () {
 				var star = $(this);
-				
+
 				star.on('click', function () {
 					var i = star.index();
 					dem = 0;
@@ -219,7 +275,7 @@ jQuery(document).ready(function ($) {
 						dem++;
 
 					};
-					$('#txtRate').value(dem);
+					$('#txtRate').val(dem);
 					console.log(dem);
 				});
 			});

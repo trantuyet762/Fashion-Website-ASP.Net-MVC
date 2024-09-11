@@ -55,5 +55,18 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             }
             return Json(new { message = "Lỗi!!", Success = false });
         }
+        [Authorize(Roles ="Admin")]
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var item = db.Orders.Find(id);
+            if (item != null)
+            {
+                db.Orders.Remove(item);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
     }
 }

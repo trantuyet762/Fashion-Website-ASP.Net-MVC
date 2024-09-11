@@ -27,7 +27,7 @@
                 
                 <div class="col-md-12 text-center">
                     <h1 class="">Thanh toán</h1>
-                    <p>Kiểm tra lại thông tin đặt hàng của ban!!</p>
+                    <p>Kiểm tra lại thông tin đặt hàng của bạn!!</p>
                 </div>
 
             </div>
@@ -64,7 +64,7 @@
     <script>
       function  OnFailure(rs){
           if (!rs.Success) {
-              $('#show_success').html("Bạn mua hàng thất bại!")
+              $('#show_success').html("Bạn mua hàng thất bại! Vui lòng kiểm tra lại đơn hàng của bạn nếu muốn hủy!!")
           }
         }
         $(document).ready(function () {
@@ -94,7 +94,7 @@
                 messages: {
                     'CustomerName': 'Tên không được để trống!',
                     'Phone': 'Số điện thoại không được để trống!',
-                    'Address': 'Địa chỉ không được để trống!',
+                    'Address': 'Địa chỉ không được để trống!Số điện thoại phải là số',
                     'Email': 'Email không được để trống! Email phải đúng định dạng!'
                 }
             });

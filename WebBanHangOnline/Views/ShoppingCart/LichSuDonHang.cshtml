@@ -1,0 +1,147 @@
+﻿﻿@model IEnumerable<WebBanHangOnline.Models.EF.Order>
+@using WebBanHangOnline.Common;
+@{
+    ViewBag.Title = "LichSuDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/assets/styles/categories_style.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_responsive.css">
+<div class="container product_section_container">
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col product_section clearfix">
+
+            <!-- Breadcrumbs -->
+
+            <div class="breadcrumbs d-flex flex-row align-items-center">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Lịch sử đơn hàng</a></li>
+                </ul>
+            </div>
+            <div class="col-md-12" style="border-bottom: 1px solid #cecaca"></div>
+        </div>
+    </div>
+    <div class="row ">
+        @if (Model != null)
+        {
+            var i = 1;
+            foreach (var order in Model)
+            {
+               
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row p-2 ">
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <h5 style="color:firebrick">
+                                        Đơn hàng: @order.Code ( @order.CreatedDate.ToString("dd/MM/yyyy HH:mm"))
+
+                                    </h5>
+
+                                    @if (order.Status == 1)
+                                    {
+                                        <h5 style="color:firebrick"> - Chưa thanh toán</h5>
+                                    }
+
+
+                                    @if (order.Status == 2)
+                                    {
+                                        <h5 style="color:firebrick"> - Đã thanh toán</h5>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                @if ((DateTime.Now.Subtract(order.CreatedDate).Days <= 2 && order.Status == 1) || (DateTime.Now.Subtract(order.CreatedDate).Days <= 2 && order.Status == 2))
+                                {
+                                    <button class="btn btn-danger" onclick="confirmCancel(@order.id)">Hủy</button>
+                                }
+                                else if (order.Status == 3)
+                                {
+
+                                    <button class="btn btn-danger">Đã giao hàng</button>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-danger">Đang giao hàng</button>
+                                }
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Màu</th>
+                                    <th>Size</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
+                                    <th>Thành tiền</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var orderDetail in order.OrderDetails)
+                                {
+                                    var TotalPrice = orderDetail.Price * orderDetail.Quantity;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td><img src="@orderDetail.Product.ProductImage.FirstOrDefault(x=>x.IsDefault).Image" width="80"></td>
+                                        <td style="max-width: 350px; min-width: 350px;">@orderDetail.Product.Title</td>
+                                        <td>@orderDetail.ColorName</td>
+                                        <td>@orderDetail.SizeName</td>
+                                        <td>@orderDetail.Quantity</td>
+                                        <td>@Common.FormatNumber(orderDetail.Price, 0)</td>
+                                        <td>@Common.FormatNumber(TotalPrice, 0)</td>
+                                    </tr>
+
+                                    i++;
+                                }
+                                <tr>
+                                    <th colspan="7" class="text-right">Tổng tiền</th>
+                                    <th>@Common.FormatNumber(order.TotalAmount, 0)</th>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        function confirmCancel(id) {
+            if (confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?")) {
+                
+                cancelOrder(id);
+            }
+        }
+
+        function cancelOrder(id) {
+            // Gọi hàm hủy đơn hàng thông qua Ajax
+            $.ajax({
+                url: '/ShoppingCart/CancelOrder', // Thay thế ControllerName bằng tên controller của bạn
+                type: 'POST',
+                data: { id:id},
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                        window.location.reload();
+                    } else {
+                        alert(response.message); // Hiển thị thông báo lỗi
+                    }
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra khi hủy đơn hàng."); // Hiển thị thông báo lỗi
+                }
+            });
+        }
+    </script>
+
+}
+

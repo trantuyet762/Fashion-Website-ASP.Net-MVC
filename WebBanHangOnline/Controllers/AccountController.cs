@@ -97,6 +97,7 @@ namespace WebBanHangOnline.Controllers
             item.Email = user.Email;
             item.FullName = user.FullName;
             item.Phone = user.Phone;
+            item.Password = user.PasswordHash;
             item.UserName = user.UserName;
             return View(user);
         }
@@ -108,6 +109,7 @@ namespace WebBanHangOnline.Controllers
             user.Email = req.Email;
             user.FullName = req.FullName;
             user.Phone = req.Phone;
+            user.PasswordHash = req.Password;
             var rs =await UserManager.UpdateAsync(user);
             if (rs.Succeeded)
             {

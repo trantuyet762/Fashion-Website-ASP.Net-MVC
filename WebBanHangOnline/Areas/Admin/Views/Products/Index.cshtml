@@ -92,7 +92,7 @@
                         <th>Ngày tạo</th>
                         <th>Home</th>
                         <th>Sale</th>
-                        <th>Hot</th>
+                        
                         <th>Hiển thị</th>
 
                         <th style="width:150px;"></th>
@@ -132,10 +132,7 @@
                             <a href="#" data-id="@item.id" class="btnSale">@Html.Raw(strCheckSale)</a>
 
                         </td>
-                        <td class="text-center">
-                            <a href="#" data-id="@item.id" class="btnHot">@Html.Raw(strCheckHot)</a>
-
-                        </td>
+                        
                         <td class="text-center">
                             <a href="#" data-id="@item.id" class="btnActive">@Html.Raw(strCheck)</a>
 
@@ -346,32 +343,7 @@
                 });
 
             });
-            $('body').on('click', '.btnHot', function (e) {
-                e.preventDefault();
-                var btn = $(this);
-
-                var id = btn.data("id");
-
-                $.ajax({
-                    url: '/admin/products/IsHot',
-                    type: 'POST',
-                    data: { id: id },
-                    success: function (rs) {
-                        debugger;
-                        if (rs.success) {
-                            if (rs.isHot) {
-                                btn.html("<i class='fa fa-check text-success'></i>");
-                            }
-                            else {
-                                btn.html("<i class='fas fa-times text-danger'></i>");
-
-                            }
-                        }
-
-                    }
-                });
-
-            });
+         
         });
     </script>
 }

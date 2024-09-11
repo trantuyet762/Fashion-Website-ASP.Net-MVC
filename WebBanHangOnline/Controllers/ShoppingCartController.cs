@@ -9,6 +9,7 @@ using WebBanHangOnline.Models.EF;
 using WebBanHangOnline.Models.Payments;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace WebBanHangOnline.Controllers
 {
@@ -74,6 +75,7 @@ namespace WebBanHangOnline.Controllers
                     {
                         //Thanh toan khong thanh cong. Ma loi: vnp_ResponseCode
                         ViewBag.InnerText = "Có lỗi xảy ra trong quá trình xử lý.Mã lỗi: " + vnp_ResponseCode;
+                        return View();
                         //log.InfoFormat("Thanh toan loi, OrderId={0}, VNPAY TranId={1},ResponseCode={2}", orderId, vnpayTranId, vnp_ResponseCode);
                     }
                     //displayTmnCode.InnerText = "Mã Website (Terminal ID):" + TerminalID;
@@ -248,8 +250,10 @@ namespace WebBanHangOnline.Controllers
             var code = new { Success = false, msg = "", code = -1, Count = 0 };
             var db = new ApplicationDbContext();
             var checkProduct = db.Products.FirstOrDefault(x => x.id == id);
-            var checkSize = db.ProductSizes.FirstOrDefault(x => x.SizeID == size); // Lấy size mới được chọn
-            var checkColor = db.ProductColors.FirstOrDefault(x => x.ColorID == color);
+            /*var checkSize = db.ProductSizes.FirstOrDefault(x => x.SizeID == size);*/ // Lấy size mới được chọn
+            var checkSize = db.ProductQuantities.FirstOrDefault(x => x.SizeId == size);
+            /*var checkColor = db.ProductColors.FirstOrDefault(x => x.ColorID == color);*/
+            var checkColor = db.ProductQuantities.FirstOrDefault(x => x.ColorId == color);
             if (checkProduct != null && checkSize != null && checkColor != null)
             {
                 ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -341,6 +345,41 @@ namespace WebBanHangOnline.Controllers
             }
             return Json(new { Success = false });
         }
+        [AllowAnonymous]
+        public ActionResult LichSuDonHang()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userStore = new UserStore<ApplicationUser>(new ApplicationDbContext());
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                var user = userManager.FindByName(User.Identity.Name);
+                var items = db.Orders.Where(x => x.CustomerId == user.Id).OrderByDescending(x=>x.CreatedDate).ToList();
+                return View(items);
+            }
+
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult CancelOrder(int id)
+        {
+            
+                var order = db.Orders.Find(id);
+                if (order != null && DateTime.Now.Subtract(order.CreatedDate).Days <= 2)
+                {
+                    db.Orders.Remove(order); // Xóa đơn hàng từ cơ sở dữ liệu
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Đã hủy đơn hàng thành công." });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Đơn hàng không thể hủy." });
+                }
+            
+            
+        }
+
+
         [AllowAnonymous]
 
         #region Thanh toán vnpay

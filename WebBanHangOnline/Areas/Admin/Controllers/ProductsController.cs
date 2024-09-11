@@ -185,19 +185,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             }
             return Json(new { success = false });
         }
-        [HttpPost]
-        public ActionResult IsHot(int id)
-        {
-            var item = db.Products.Find(id);
-            if (item != null)
-            {
-                item.IsActive = !item.IsHot;
-                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return Json(new { success = true, isHot = item.IsHot });
-            }
-            return Json(new { success = false });
-        }
+  
 
     }
 }

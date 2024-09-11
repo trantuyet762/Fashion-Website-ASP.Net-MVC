@@ -51,11 +51,11 @@ namespace WebBanHangOnline.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Tên đăng nhập không để trống")]
         [Display(Name = "Tên đăng nhập")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Vui lòng nhập mật khẩu! Mật khẩu nhập không đúng!!")]
         [DataType(DataType.Password)]
         [Display(Name = "Mật khẩu")]
         public string Password { get; set; }

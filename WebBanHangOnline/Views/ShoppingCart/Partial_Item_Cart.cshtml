@@ -35,7 +35,8 @@
                 <td>@item.SizeName</td>
                 <td>@item.ColorName</td>
                 <td>@Common.FormatNumber(item.Price, 0)</td>
-                <td><input class="form-control quantity-input" type="number" min="0"  value="@item.Quantity" id="Quantity_@item.ProductId" /></td>
+
+                <td><input class="form-control quantity-input" type="number" min="0" max="@item.Quantity"  value="@item.Quantity" id="Quantity_@item.ProductId" /></td>
                 <td>@Common.FormatNumber(item.TotalPrice, 0)</td>
                 <td class="text-right" style="padding:0px; padding-top: 12px;">
                     <a href="#" data-id="@item.ProductId " class="btn btn-sm btn-danger btnDelete">Xóa</a>
